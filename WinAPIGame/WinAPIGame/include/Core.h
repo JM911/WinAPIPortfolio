@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include "Object/Obj.h"	// юс╫ц
 
 class Core
 {
@@ -29,6 +30,11 @@ public:
 
 private:
 	void Logic();
+	void Input(float fDeltaTime);
+	int Update(float fDeltaTime);
+	int LateUpdate(float fDeltaTime);
+	void Collision(float fDeltaTime);
+	void Render(float fDeltaTime);
 
 	DECLARE_SINGLE(Core)
 };

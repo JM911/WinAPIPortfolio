@@ -114,5 +114,44 @@ int Core::Run()
 
 void Core::Logic()
 {
+	// TODO: 타이머 갱신
+	float fDeltaTime = 0.f;
+
+	// TODO: 씬이 바뀔때 Update와 LateUpdate의 return 처리
+	Input(fDeltaTime);
+	Update(fDeltaTime);
+	LateUpdate(fDeltaTime);
+	Collision(fDeltaTime);
+	Render(fDeltaTime);
+}
+
+void Core::Input(float fDeltaTime)
+{
+	// TODO: Input 클래스의 Update & SceneManager, Camera 클래스의 Input 실행
+}
+
+int Core::Update(float fDeltaTime)
+{
+	// TODO: SceneManager, Camera 클래스의 Update 실행
+	return 0;
+}
+
+int Core::LateUpdate(float fDeltaTime)
+{
+	// TODO: SceneManager 클래스의 LateUpdate 실행
+	return 0;
+}
+
+void Core::Collision(float fDeltaTime)
+{
+	// TODO: SceneManager, CollisionManager 클래스의 Collision 실행
+}
+
+void Core::Render(float fDeltaTime)
+{
+	// TODO: 더블버퍼링 적용(ResourceManager, SceneManager)
+	// TODO: SceneManager의 Render(DC값은 더블버퍼링 적용 전은 m_hDC, 적용 후는 백버퍼의 DC)
+
+	// 정상적인 Render 흐름: 코어->씬매니저->씬->레이어->오브젝트 (이후 오브젝트에서 직접 그림)
 }
 

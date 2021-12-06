@@ -16,6 +16,9 @@
     <Filter Include="01. Core">
       <UniqueIdentifier>{f4793a6c-7726-4200-a30e-c391d32464ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object">
+      <UniqueIdentifier>{62140395-2017-4e5c-befb-8a59776adc78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,6 +26,12 @@
     </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>01. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Ref.cpp">
+      <Filter>01. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Obj.cpp">
+      <Filter>02. Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +49,12 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Ref.h">
+      <Filter>01. Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Obj.h">
+      <Filter>02. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

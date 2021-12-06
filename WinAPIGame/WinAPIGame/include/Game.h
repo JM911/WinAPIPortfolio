@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <crtdbg.h>
+#include <string>
 
 using namespace std;
 
