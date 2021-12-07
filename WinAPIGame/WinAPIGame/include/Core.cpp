@@ -1,4 +1,6 @@
 #include "Core.h"
+#include "Core/Timer.h"
+#include "Scene/SceneManager.h"
 
 DEFINITION_SINGLE(Core)
 bool Core::m_bLoop = true;
@@ -32,6 +34,10 @@ Core::Core()
 
 Core::~Core()
 {
+	// TODO: 각종 싱글턴 DESTROY_SINGLE 해주기
+	DESTROY_SINGLE(Timer);
+	DESTROY_SINGLE(SceneManager);
+
 	ReleaseDC(m_hWnd, m_hDC);
 }
 
@@ -88,6 +94,16 @@ bool Core::Init(HINSTANCE hInst)
 
 	m_hDC = GetDC(m_hWnd);
 
+	// TODO: 각종 싱글턴 Init
+
+	// 타이머 초기화
+	if (!GET_SINGLE(Timer)->Init(m_hWnd))
+		return false;
+
+	// 씬매니저 초기화
+	if (!GET_SINGLE(SceneManager)->Init())
+		return false;
+
 	return TRUE;
 }
 
@@ -114,8 +130,9 @@ int Core::Run()
 
 void Core::Logic()
 {
-	// TODO: 타이머 갱신
-	float fDeltaTime = 0.f;
+	GET_SINGLE(Timer)->Update();
+
+	float fDeltaTime = GET_SINGLE(Timer)->GetDeltaTime();
 
 	// TODO: 씬이 바뀔때 Update와 LateUpdate의 return 처리
 	Input(fDeltaTime);
@@ -128,23 +145,27 @@ void Core::Logic()
 void Core::Input(float fDeltaTime)
 {
 	// TODO: Input 클래스의 Update & SceneManager, Camera 클래스의 Input 실행
+	GET_SINGLE(SceneManager)->Input(fDeltaTime);
 }
 
 int Core::Update(float fDeltaTime)
 {
 	// TODO: SceneManager, Camera 클래스의 Update 실행
+	GET_SINGLE(SceneManager)->Update(fDeltaTime);
 	return 0;
 }
 
 int Core::LateUpdate(float fDeltaTime)
 {
 	// TODO: SceneManager 클래스의 LateUpdate 실행
+	GET_SINGLE(SceneManager)->LateUpdate(fDeltaTime);
 	return 0;
 }
 
 void Core::Collision(float fDeltaTime)
 {
 	// TODO: SceneManager, CollisionManager 클래스의 Collision 실행
+	GET_SINGLE(SceneManager)->Collision(fDeltaTime);
 }
 
 void Core::Render(float fDeltaTime)
@@ -152,6 +173,7 @@ void Core::Render(float fDeltaTime)
 	// TODO: 더블버퍼링 적용(ResourceManager, SceneManager)
 	// TODO: SceneManager의 Render(DC값은 더블버퍼링 적용 전은 m_hDC, 적용 후는 백버퍼의 DC)
 
-	// 정상적인 Render 흐름: 코어->씬매니저->씬->레이어->오브젝트 (이후 오브젝트에서 직접 그림)
+	// 정상적인 Render 흐름: 코어->씬매니저->개별씬->개별레이어->개별오브젝트 (이후 오브젝트에서 직접 그림)
+	GET_SINGLE(SceneManager)->Render(m_hDC, fDeltaTime);
 }
 

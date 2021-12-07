@@ -44,5 +44,5 @@ void Obj::Render(HDC hDC, float fDeltaTime)
 	// TODO: 화면 밖으로 나가면 렌더하지 않도록 하는 설정 추가
 
 	// TODO: 나중에 텍스쳐 설정하면 텍스쳐와 애니메이션을 그리도록 수정
-	Rectangle(hDC, (int)tPos.x, (int)tPos.y, (int)(tPos.x + m_tSize.x), (int)(tPos.y + m_tSize.y));
+	//Rectangle(hDC, (int)tPos.x, (int)tPos.y, (int)(tPos.x + m_tSize.x), (int)(tPos.y + m_tSize.y));
 }

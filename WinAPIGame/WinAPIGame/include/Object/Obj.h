@@ -82,13 +82,13 @@ public:
     }
 
 public:
-    //virtual bool Init();    // TODO: 순수가상함수로 수정
+    virtual bool Init() = 0;
     virtual void Input(float fDeltaTime);
     virtual int Update(float fDeltaTime);
     virtual int LateUpdate(float fDeltaTime);
     virtual void Collision(float fDeltaTime);
     virtual void Render(HDC hDC, float fDeltaTime);
 
-    //virtual Obj* Clone();   // TODO: 순수가상함수로 수정
+    virtual Obj* Clone() = 0;
 };
 
