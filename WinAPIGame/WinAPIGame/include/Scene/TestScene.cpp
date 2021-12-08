@@ -22,6 +22,7 @@ bool TestScene::Init()
 	Player* pPlayer = new Player;
 	pPlayer->Init();
 	pLayer->AddObject(pPlayer);
+	SAFE_RELEASE(pPlayer);
 
 	return true;
 }

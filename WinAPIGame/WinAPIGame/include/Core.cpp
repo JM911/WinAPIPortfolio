@@ -1,6 +1,10 @@
 #include "Core.h"
 #include "Core/Timer.h"
 #include "Scene/SceneManager.h"
+#include "Core/CInput.h"
+#include "Core/PathManager.h"
+#include "Resources/ResourcesManager.h"
+#include "Resources/Texture.h"
 
 DEFINITION_SINGLE(Core)
 bool Core::m_bLoop = true;
@@ -30,6 +34,14 @@ LRESULT Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 Core::Core()
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(232);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
+							 // 괄호 안에 메모리 블럭 번호를 대입하고 프로그램을 실행해보면 메모리 누수가 생기는 코드로 이동함
+							 // 호출 스택에서 전 단계들을 확인하여 원인을 찾아내자.
+
+	// _CRTDBG_ALLOC_MEM_DF: 할당하는 메모리 체크
+	// _CRTDBG_LEAK_CHECK_DF: 메모리 누수가 생긴 부분으로 이동(?)
+	// 메모리 누수가 있으면 프로그램 종료 시 출력 란에 알려줌 => 여기서 블록 번호를 체크하자
 }
 
 Core::~Core()
@@ -37,6 +49,9 @@ Core::~Core()
 	// TODO: 각종 싱글턴 DESTROY_SINGLE 해주기
 	DESTROY_SINGLE(Timer);
 	DESTROY_SINGLE(SceneManager);
+	DESTROY_SINGLE(CInput);
+	DESTROY_SINGLE(PathManager);
+	DESTROY_SINGLE(ResourcesManager);
 
 	ReleaseDC(m_hWnd, m_hDC);
 }
@@ -104,6 +119,18 @@ bool Core::Init(HINSTANCE hInst)
 	if (!GET_SINGLE(SceneManager)->Init())
 		return false;
 
+	// 인풋 초기화
+	if (!GET_SINGLE(CInput)->Init())
+		return false;
+
+	// 경로 매니저 초기화
+	if (!GET_SINGLE(PathManager)->Init())
+		return false;
+
+	// 리소스 매니저 초기화
+	if (!GET_SINGLE(ResourcesManager)->Init(m_hInst, m_hDC))
+		return false;
+
 	return TRUE;
 }
 
@@ -146,6 +173,7 @@ void Core::Input(float fDeltaTime)
 {
 	// TODO: Input 클래스의 Update & SceneManager, Camera 클래스의 Input 실행
 	GET_SINGLE(SceneManager)->Input(fDeltaTime);
+	GET_SINGLE(CInput)->Update(fDeltaTime);
 }
 
 int Core::Update(float fDeltaTime)
@@ -170,10 +198,15 @@ void Core::Collision(float fDeltaTime)
 
 void Core::Render(float fDeltaTime)
 {
-	// TODO: 더블버퍼링 적용(ResourceManager, SceneManager)
-	// TODO: SceneManager의 Render(DC값은 더블버퍼링 적용 전은 m_hDC, 적용 후는 백버퍼의 DC)
+	Texture* pBackBuffer = GET_SINGLE(ResourcesManager)->GetBackBuffer();
+	
+	Rectangle(pBackBuffer->GetDC(), 0, 0, m_tRS.iW, m_tRS.iH);	// 나중에 배경 적용하면 지워도됨
+	GET_SINGLE(SceneManager)->Render(pBackBuffer->GetDC(), fDeltaTime);
 
 	// 정상적인 Render 흐름: 코어->씬매니저->개별씬->개별레이어->개별오브젝트 (이후 오브젝트에서 직접 그림)
-	GET_SINGLE(SceneManager)->Render(m_hDC, fDeltaTime);
+	//GET_SINGLE(SceneManager)->Render(m_hDC, fDeltaTime);
+	BitBlt(m_hDC, 0, 0, m_tRS.iW, m_tRS.iH, pBackBuffer->GetDC(), 0, 0, SRCCOPY);
+
+	SAFE_RELEASE(pBackBuffer);
 }
 

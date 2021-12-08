@@ -14,6 +14,8 @@ public:     // TODO: 테스트 끝나면 protected로 수정
     ~Player();
 
 // TODO: 방향 등 필요한 요소 추가
+private:
+    int m_iDir;
 
 public:
     virtual bool Init();
@@ -24,5 +26,9 @@ public:
     virtual void Render(HDC hDC, float fDeltaTime);
 
     virtual MoveObj* Clone();
+
+    // 아래로는 플레이어 조작 관련 변수, 함수
+private:
+    float fDashTime;
 };
 

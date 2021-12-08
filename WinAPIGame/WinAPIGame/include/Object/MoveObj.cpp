@@ -3,7 +3,7 @@
 MoveObj::MoveObj()  :  // TODO: 변수들 모두 초기화했는지 확인!
     m_fMass(0),
     m_tSpeed(0, 0),
-    m_tAccel(0, 500)
+    m_tAccel(0, 2000)
 {
 }
 

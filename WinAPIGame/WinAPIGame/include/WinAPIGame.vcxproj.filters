@@ -43,6 +43,15 @@
     <Filter Include="03. Object\01. MoveObj\02. Bullet">
       <UniqueIdentifier>{f3935658-cb69-4849-9f76-14c6cba0fdbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Core\02. Input">
+      <UniqueIdentifier>{7f3de982-b649-48e3-964c-77ceaa1b2d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resources">
+      <UniqueIdentifier>{32d29c78-f007-4663-a75d-c54ed744dd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core\03. Path">
+      <UniqueIdentifier>{ecaac4ee-4f34-4692-b469-696af81f7c83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -80,6 +89,18 @@
     </ClCompile>
     <ClCompile Include="Object\Player.cpp">
       <Filter>03. Object\01. MoveObj\01. Creature\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CInput.cpp">
+      <Filter>01. Core\02. Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\ResourcesManager.cpp">
+      <Filter>04. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Texture.cpp">
+      <Filter>04. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\PathManager.cpp">
+      <Filter>01. Core\03. Path</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +148,18 @@
     </ClInclude>
     <ClInclude Include="Object\Player.h">
       <Filter>03. Object\01. MoveObj\01. Creature\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CInput.h">
+      <Filter>01. Core\02. Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\ResourcesManager.h">
+      <Filter>04. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Texture.h">
+      <Filter>04. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\PathManager.h">
+      <Filter>01. Core\03. Path</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

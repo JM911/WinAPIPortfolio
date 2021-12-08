@@ -1,6 +1,9 @@
 #include "Player.h"
+#include "../Core/CInput.h"
 
-Player::Player()	// TODO: 변수들 모두 초기화했는지 확인!
+Player::Player()	:	// TODO: 변수들 모두 초기화했는지 확인!
+	m_iDir(1),
+	fDashTime(0.f)
 {
 }
 
@@ -16,7 +19,7 @@ Player::~Player()
 bool Player::Init()
 {
 	SetPos(200.f, 100.f);
-	SetSize(100.f, 100.f);
+	SetSize(50.f, 50.f);
 	SetSpeed(0.f, 0.f);
 	SetPivot(0.5f, 0.5f);
 
@@ -26,6 +29,48 @@ bool Player::Init()
 void Player::Input(float fDeltaTime)
 {
 	Creature::Input(fDeltaTime);
+
+	if (KEYPRESS("MoveLeft"))		// 왼쪽 방향키
+	{
+		m_tPos.x -= 200 * fDeltaTime;
+		m_iDir = -1;
+	}
+
+	if (KEYPRESS("MoveRight"))		// 오른쪽 방향키
+	{
+		m_tPos.x += 200 * fDeltaTime;
+		m_iDir = 1;
+	}
+
+	if (KEYDOWN("Jump"))			// Z
+	{
+		m_tSpeed.y = -1000.f;
+	}
+
+	if (KEYPRESS("DashRight"))		// → + X
+	{
+		fDashTime += fDeltaTime;
+		if (fDashTime <= 0.1f)
+			m_tPos.x += 2000 * fDeltaTime;
+	}
+
+	if (KEYUP("DashRight"))
+	{
+		fDashTime = 0.f;
+	}
+
+	if (KEYPRESS("DashLeft"))		// ← + X
+	{
+		fDashTime += fDeltaTime;
+		if (fDashTime <= 0.1f)
+			m_tPos.x -= 2000 * fDeltaTime;
+	}
+
+	if (KEYUP("DashLeft"))
+	{
+		fDashTime = 0.f;
+	}
+	
 }
 
 int Player::Update(float fDeltaTime)
