@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\Animation.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\CInput.cpp" />
@@ -167,11 +168,13 @@
     <ClCompile Include="Scene\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\Animation.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\CInput.h" />
     <ClInclude Include="Core\PathManager.h" />
     <ClInclude Include="Core\Timer.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Object\Creature.h" />

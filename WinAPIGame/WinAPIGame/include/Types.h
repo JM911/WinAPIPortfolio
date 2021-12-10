@@ -1,4 +1,5 @@
 #pragma once
+#include "Flag.h"
 
 typedef struct _tagResolution
 {
@@ -56,3 +57,33 @@ typedef struct _tagPosition
 	// TODO?: 사칙연산 오버로딩
 
 }POSITION, *PPOSITION, _SIZE, *_PSIZE;
+
+// TODO: 애니메이션 클립을 아틀라스/프레임 두 개로 아예 나눠버릴까?
+typedef struct _tagAnimationClip		// 모션 하나를 저장하는 역할 (구조체 1개 = 모션 1개)
+{
+	ANI_TYPE		eType;
+	ANI_OPTION		eOption;
+	vector<class Texture*>	vecTexture;	// 프레임 애니메이션이라면 여러 장 push
+	
+	// 애니메이션의 속도 조절용
+	float			fAnimationTime;
+	float			fAnimationLimitTime;
+	float			fAnimationFrameTime;
+	
+	// 아틀라스 타입인 경우 사용
+	int				iCurFrameX;
+	int				iCurFrameY;
+	int				iMaxFrameX;
+	int				iMaxFrameY;
+	//int				iStartFrameX;
+	//int				iStartFrameY;
+	int				iTotalFrame;
+	
+	// 애니메이션 옵션에 따라 사용할 수도 있는 변수
+	float			fOptionTime;
+	float			fOptionLimitTime;
+
+	// 출력에 쓰일 프레임 사이즈, 프레임 간격
+	_SIZE			tFrameSize;			// 실제 출력할 그림 크기
+	_SIZE			tFrameInterval;		// 그림 간의 간격
+}ANIMATIONCLIP, *PANIMATIONCLIP;

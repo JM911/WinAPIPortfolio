@@ -30,7 +30,7 @@ bool TestBackground::Init(POSITION tPos, _SIZE tSize, POSITION tPivot, const str
 
 bool TestBackground::Init()
 {
-	return false;
+	return true;
 }
 
 void TestBackground::Input(float fDeltaTime)

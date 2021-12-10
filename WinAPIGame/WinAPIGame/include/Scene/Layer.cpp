@@ -14,7 +14,7 @@ Layer::~Layer()
 	
 	for (iter = m_ObjList.begin(); iter != m_ObjList.end(); ++iter)
 	{
-		// TODO: Obj에 ObjList를 추가하게 되면 삭제하는 함수도 만들어서 추가
+		Obj::EraseObj(*iter);
 		SAFE_RELEASE((*iter));
 	}
 
@@ -23,9 +23,10 @@ Layer::~Layer()
 
 void Layer::AddObject(Obj* pObj)
 {
-	// TODO: pObj의 씬, 레이어 추가 함수
-	
+	pObj->SetScene(m_pScene);
+	pObj->SetLayer(this);
 	pObj->AddRef();
+
 	m_ObjList.push_back(pObj);
 }
 

@@ -64,16 +64,16 @@ void Camera::Update(float fDeltaTime)
 		if (tPos.x <= fLeftArea)						// 타겟이 월드의 왼쪽 벽과 가까울 때
 			m_tPos.x = 0.f;
 		else if (tPos.x >= m_tWorldRS.iW - fRightArea)	// 타겟이 월드의 오른쪽 벽과 가까울 때
-			m_tPos.x = m_tWorldRS.iW - m_tClientRS.iW;
+			m_tPos.x = (float)m_tWorldRS.iW - (float)m_tClientRS.iW;
 		else
-			m_tPos.x = tPos.x - m_tClientRS.iW * m_tPivot.x;
+			m_tPos.x = tPos.x - (float)m_tClientRS.iW * m_tPivot.x;
 
 		if (tPos.y <= fTopArea)							// 타겟이 월드의 위쪽 벽과 가까울 때
 			m_tPos.y = 0.f;
 		else if (tPos.y >= m_tWorldRS.iH - fBottomArea)	// 타겟이 월드의 아래쪽 벽과 가까울 때
-			m_tPos.y = m_tWorldRS.iH - m_tClientRS.iH;
+			m_tPos.y = (float)m_tWorldRS.iH - (float)m_tClientRS.iH;
 		else
-			m_tPos.y = tPos.y - m_tClientRS.iH * m_tPivot.y;
+			m_tPos.y = tPos.y - (float)m_tClientRS.iH * m_tPivot.y;
 	}
 }
 
@@ -85,10 +85,10 @@ void Camera::Scroll(float x, float y)
 	if (m_tPos.x < 0)
 		m_tPos.x = 0;
 	else if (m_tPos.x > m_tWorldRS.iW - m_tClientRS.iW)
-		m_tPos.x = m_tWorldRS.iW - m_tClientRS.iW;
+		m_tPos.x = (float)m_tWorldRS.iW - (float)m_tClientRS.iW;
 
 	if (m_tPos.y < 0)
 		m_tPos.y = 0;
 	else if (m_tPos.y > m_tWorldRS.iH - m_tClientRS.iH)
-		m_tPos.y = m_tWorldRS.iH - m_tClientRS.iH;
+		m_tPos.y = (float)m_tWorldRS.iH - (float)m_tClientRS.iH;
 }
