@@ -24,6 +24,10 @@
 #define GET_SINGLE(Type)		Type::GetInst()
 #define	DESTROY_SINGLE(Type)	Type::DestroyInst()
 
+#define GETRESOLUTION	Core::GetInst()->GetResolution()
+#define WINDOWHANDLE	Core::GetInst()->GetWindowHandle()
+#define WINDOWINSTANCE	Core::GetInst()->GetWindowInstance()
+
 #define KEYDOWN(key)	CInput::GetInst()->KeyDown(key)
 #define KEYPRESS(key)	CInput::GetInst()->KeyPress(key)
 #define KEYUP(key)		CInput::GetInst()->KeyUp(key)

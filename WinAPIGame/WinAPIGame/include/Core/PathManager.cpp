@@ -31,6 +31,10 @@ bool PathManager::Init()
     if (!CreatePath(TEXTURE_PATH, L"Texture/"))
         return false;
 
+    // 배경 경로 설정
+    if (!CreatePath(BACKGROUND_PATH, L"Texture/Backgrounds/"))
+        return false;
+
     return true;
 }
 

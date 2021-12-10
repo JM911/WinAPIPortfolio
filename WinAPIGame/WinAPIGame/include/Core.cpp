@@ -5,6 +5,7 @@
 #include "Core/PathManager.h"
 #include "Resources/ResourcesManager.h"
 #include "Resources/Texture.h"
+#include "Core/Camera.h"
 
 DEFINITION_SINGLE(Core)
 bool Core::m_bLoop = true;
@@ -35,7 +36,7 @@ LRESULT Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 Core::Core()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(232);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
+	//_CrtSetBreakAlloc(353);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
 							 // 괄호 안에 메모리 블럭 번호를 대입하고 프로그램을 실행해보면 메모리 누수가 생기는 코드로 이동함
 							 // 호출 스택에서 전 단계들을 확인하여 원인을 찾아내자.
 
@@ -52,6 +53,7 @@ Core::~Core()
 	DESTROY_SINGLE(CInput);
 	DESTROY_SINGLE(PathManager);
 	DESTROY_SINGLE(ResourcesManager);
+	DESTROY_SINGLE(Camera);
 
 	ReleaseDC(m_hWnd, m_hDC);
 }
@@ -105,6 +107,10 @@ bool Core::Init(HINSTANCE hInst)
 	m_tRS.iW = 1280;
 	m_tRS.iH = 720;
 
+	// 월드 맵크기 설정
+	m_tWorldRS.iW = 1920;
+	m_tWorldRS.iH = 1080;
+
 	Create();
 
 	m_hDC = GetDC(m_hWnd);
@@ -115,20 +121,24 @@ bool Core::Init(HINSTANCE hInst)
 	if (!GET_SINGLE(Timer)->Init(m_hWnd))
 		return false;
 
-	// 씬매니저 초기화
-	if (!GET_SINGLE(SceneManager)->Init())
+	// 경로 매니저 초기화
+	if (!GET_SINGLE(PathManager)->Init())
 		return false;
 
 	// 인풋 초기화
 	if (!GET_SINGLE(CInput)->Init())
 		return false;
 
-	// 경로 매니저 초기화
-	if (!GET_SINGLE(PathManager)->Init())
-		return false;
-
 	// 리소스 매니저 초기화
 	if (!GET_SINGLE(ResourcesManager)->Init(m_hInst, m_hDC))
+		return false;
+
+	// 카메라 초기화
+	if (!GET_SINGLE(Camera)->Init(POSITION(0.f, 0.f), m_tRS, m_tWorldRS))
+		return false;
+
+	// 씬매니저 초기화
+	if (!GET_SINGLE(SceneManager)->Init())
 		return false;
 
 	return TRUE;
@@ -171,21 +181,20 @@ void Core::Logic()
 
 void Core::Input(float fDeltaTime)
 {
-	// TODO: Input 클래스의 Update & SceneManager, Camera 클래스의 Input 실행
-	GET_SINGLE(SceneManager)->Input(fDeltaTime);
 	GET_SINGLE(CInput)->Update(fDeltaTime);
+	GET_SINGLE(SceneManager)->Input(fDeltaTime);
+	GET_SINGLE(Camera)->Input(fDeltaTime);
 }
 
 int Core::Update(float fDeltaTime)
 {
-	// TODO: SceneManager, Camera 클래스의 Update 실행
 	GET_SINGLE(SceneManager)->Update(fDeltaTime);
+	GET_SINGLE(Camera)->Update(fDeltaTime);
 	return 0;
 }
 
 int Core::LateUpdate(float fDeltaTime)
 {
-	// TODO: SceneManager 클래스의 LateUpdate 실행
 	GET_SINGLE(SceneManager)->LateUpdate(fDeltaTime);
 	return 0;
 }

@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\CInput.cpp" />
     <ClCompile Include="Core\PathManager.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
@@ -155,6 +156,8 @@
     <ClCompile Include="Object\MoveObj.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
+    <ClCompile Include="Object\StaticObj.cpp" />
+    <ClCompile Include="Object\TestBackground.cpp" />
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="Resources\ResourcesManager.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />
@@ -165,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\CInput.h" />
     <ClInclude Include="Core\PathManager.h" />
     <ClInclude Include="Core\Timer.h" />
@@ -174,6 +178,8 @@
     <ClInclude Include="Object\MoveObj.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\Player.h" />
+    <ClInclude Include="Object\StaticObj.h" />
+    <ClInclude Include="Object\TestBackground.h" />
     <ClInclude Include="Ref.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\ResourcesManager.h" />

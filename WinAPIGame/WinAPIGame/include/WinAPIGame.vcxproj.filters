@@ -52,6 +52,15 @@
     <Filter Include="01. Core\03. Path">
       <UniqueIdentifier>{ecaac4ee-4f34-4692-b469-696af81f7c83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\02. StaticObj">
+      <UniqueIdentifier>{a3a4ac55-43a6-495e-b592-9e59abfdab63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02. StaticObj\01. Background">
+      <UniqueIdentifier>{946ba065-8693-4783-b89d-735974e984a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core\04. Camera">
+      <UniqueIdentifier>{e38ca97f-83f9-46ca-89c3-93f9976ff701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="Core\PathManager.cpp">
       <Filter>01. Core\03. Path</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\StaticObj.cpp">
+      <Filter>03. Object\02. StaticObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TestBackground.cpp">
+      <Filter>03. Object\02. StaticObj\01. Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Camera.cpp">
+      <Filter>01. Core\04. Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +178,15 @@
     </ClInclude>
     <ClInclude Include="Core\PathManager.h">
       <Filter>01. Core\03. Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\StaticObj.h">
+      <Filter>03. Object\02. StaticObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TestBackground.h">
+      <Filter>03. Object\02. StaticObj\01. Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Camera.h">
+      <Filter>01. Core\04. Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

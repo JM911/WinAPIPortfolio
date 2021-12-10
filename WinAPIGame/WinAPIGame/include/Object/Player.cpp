@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../Core/CInput.h"
+#include "../Resources/Texture.h"
 
 Player::Player()	:	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -14,6 +15,7 @@ Player::Player(const Player& player)	:	// TODO: 변수들 모두 복사or초기화 됐는지 
 
 Player::~Player()
 {
+	SAFE_RELEASE(m_pTexture);
 }
 
 bool Player::Init()
@@ -22,6 +24,10 @@ bool Player::Init()
 	SetSize(50.f, 50.f);
 	SetSpeed(0.f, 0.f);
 	SetPivot(0.5f, 0.5f);
+
+	SetTexture("Player", L"Base_1.bmp");
+	//SetColorKey(255, 255, 255);
+	//m_pTexture->SetColorKey(255, 0, 255);
 
 	return true;
 }
@@ -94,11 +100,11 @@ void Player::Render(HDC hDC, float fDeltaTime)
 {
 	Creature::Render(hDC, fDeltaTime);
 
-	POSITION tPos;
+	/*POSITION tPos;
 	tPos.x = m_tPos.x - m_tSize.x * m_tPivot.x;
-	tPos.y = m_tPos.y - m_tSize.y * m_tPivot.y;
+	tPos.y = m_tPos.y - m_tSize.y * m_tPivot.y;*/
 
-	Rectangle(hDC, (int)tPos.x, (int)tPos.y, (int)(tPos.x + m_tSize.x), (int)(tPos.y + m_tSize.y));
+	//Rectangle(hDC, (int)tPos.x, (int)tPos.y, (int)(tPos.x + m_tSize.x), (int)(tPos.y + m_tSize.y));
 }
 
 MoveObj* Player::Clone()

@@ -17,6 +17,8 @@ protected:
     _SIZE       m_tSize;
     _SIZE       m_tImageOffset;
     POSITION    m_tPivot;
+    
+    class Texture* m_pTexture;
 
 // Get ÇÔ¼ö
 public:
@@ -80,6 +82,11 @@ public:
         m_tImageOffset.x = x;
         m_tImageOffset.y = y;
     }
+
+public:
+    void SetTexture(class Texture* pTexture);
+    void SetTexture(const string& strKey, const wchar_t* pFileName = NULL, const string& strPathKey = TEXTURE_PATH);
+    void SetColorKey(unsigned char r, unsigned char g, unsigned char b);
 
 public:
     virtual bool Init() = 0;

@@ -23,6 +23,27 @@ private:
 	HWND		m_hWnd;
 	HDC			m_hDC;
 	RESOLUTION	m_tRS;
+	RESOLUTION	m_tWorldRS;
+
+	// Get 함수
+public:
+	HINSTANCE GetWindowInstance()	const
+	{
+		return m_hInst;
+	}
+	HWND GetWindowHandle()		const
+	{
+		return m_hWnd;
+	}
+	RESOLUTION GetResolution()	const
+	{
+		return m_tRS;
+	}
+
+	void DestroyGame()	// 게임 종료용
+	{
+		DestroyWindow(m_hWnd);
+	}
 
 public:
 	bool Init(HINSTANCE hInst);
