@@ -2,6 +2,7 @@
 #include "../Core/CInput.h"
 #include "../Resources/Texture.h"
 #include "../Animation/Animation.h"
+#include "../Collider/ColliderRect.h"
 
 Player::Player()	:	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -42,6 +43,15 @@ bool Player::Init()
 
 	AddAnimationClipFrame("WalkRight", ANI_OPTION::LOOP, 1.f, 12, 0.f, _SIZE(32.f, 32.f), "PlayerWalkRight", vecFileName);
 	SetAnimationClipColorKey("WalkRight", 255, 255, 255);
+
+
+	// 충돌체 추가 (Rect 타입)
+	ColliderRect* pRC = AddCollider<ColliderRect>("PlayerBody");
+
+	pRC->SetRect(-16, -16, 16, 16);
+	// TODO: 충돌이 일어났을 때의 함수 추가 및 AddCollisionFunction 호출
+
+	SAFE_RELEASE(pRC);
 
 	return true;
 }

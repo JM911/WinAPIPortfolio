@@ -147,6 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation\Animation.cpp" />
+    <ClCompile Include="Collider\Collider.cpp" />
+    <ClCompile Include="Collider\ColliderRect.cpp" />
+    <ClCompile Include="Collider\CollisionManager.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\CInput.cpp" />
@@ -154,6 +157,7 @@
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\Creature.cpp" />
+    <ClCompile Include="Object\Ground.cpp" />
     <ClCompile Include="Object\MoveObj.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
@@ -169,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animation.h" />
+    <ClInclude Include="Collider\Collider.h" />
+    <ClInclude Include="Collider\ColliderRect.h" />
+    <ClInclude Include="Collider\CollisionManager.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\CInput.h" />
@@ -178,6 +185,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Object\Creature.h" />
+    <ClInclude Include="Object\Ground.h" />
     <ClInclude Include="Object\MoveObj.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\Player.h" />

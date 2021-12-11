@@ -6,6 +6,7 @@
 #include "Resources/ResourcesManager.h"
 #include "Resources/Texture.h"
 #include "Core/Camera.h"
+#include "Collider/CollisionManager.h"
 
 DEFINITION_SINGLE(Core)
 bool Core::m_bLoop = true;
@@ -54,6 +55,7 @@ Core::~Core()
 	DESTROY_SINGLE(PathManager);
 	DESTROY_SINGLE(ResourcesManager);
 	DESTROY_SINGLE(Camera);
+	DESTROY_SINGLE(CollisionManager);
 
 	ReleaseDC(m_hWnd, m_hDC);
 }
@@ -201,8 +203,8 @@ int Core::LateUpdate(float fDeltaTime)
 
 void Core::Collision(float fDeltaTime)
 {
-	// TODO: SceneManager, CollisionManager 클래스의 Collision 실행
 	GET_SINGLE(SceneManager)->Collision(fDeltaTime);
+	GET_SINGLE(CollisionManager)->Collision(fDeltaTime);
 }
 
 void Core::Render(float fDeltaTime)

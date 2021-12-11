@@ -7,6 +7,7 @@
 #include <vector>
 #include <unordered_map>
 #include <typeinfo>			// 타입.name() 함수 사용
+#include <functional>
 
 using namespace std;
 

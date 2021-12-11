@@ -25,6 +25,7 @@
 #define	DESTROY_SINGLE(Type)	Type::DestroyInst()
 
 #define GETRESOLUTION	Core::GetInst()->GetResolution()
+#define GETWORLDRES		Core::GetInst()->GetWorldResolution()
 #define WINDOWHANDLE	Core::GetInst()->GetWindowHandle()
 #define WINDOWINSTANCE	Core::GetInst()->GetWindowInstance()
 

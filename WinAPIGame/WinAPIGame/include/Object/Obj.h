@@ -1,6 +1,7 @@
 #pragma once
 #include "../Ref.h"
 #include "../Scene/Layer.h"
+#include "../Collider/Collider.h"
 
 class Obj :
     public Ref
@@ -111,6 +112,8 @@ public:
         m_pLayer = pLayer;
     }
 
+
+    /* 텍스처, 애니메이션 관련 */
 protected:
     class Texture* m_pTexture;
     class Animation* m_pAnimation;
@@ -129,6 +132,64 @@ public:
         float fAnimationLimitTime, int iMaxFrame, float fOptionLimitTime, _SIZE tFrameSize, const string& strTexKey,
         const vector<wstring>& vecFileName, const string& strPathKey = TEXTURE_PATH);
     void SetAnimationClipColorKey(const string& strClip, unsigned char r, unsigned char g, unsigned char b);
+    /* 텍스처, 애니메이션 관련 끝*/
+
+
+    /* 충돌체 관련 */
+protected:
+    list<Collider*> m_ColliderList; // 이 오브젝트가 가지고 있는 충돌체 리스트
+
+public:
+    const list<Collider*>* GetColliderList()    const
+    {
+        return &m_ColliderList;
+    }
+    Collider* GetCollider(const string& strTag);
+
+public:
+    template <typename T>
+    void AddCollisionFunction(const string& strTag, COL_STATE eState, T* pObj, void (T::* pFunc)(Collider*, Collider*, float))
+    {
+        list<Collider*>::iterator iter;
+        list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+        for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+        {
+            if ((*iter)->GetTag() == strTag)
+            {
+                (*iter)->AddCollisionFunction(eState, pObj, pFunc);
+                break;
+            }
+        }
+    }
+
+    template <typename T>
+    T* AddCollider(const string& strTag)
+    {
+        T* pCollider = new T;
+
+        pCollider->SetObj(this);
+        pCollider->SetTag(strTag);
+
+        if (!pCollider->Init())
+        {
+            SAFE_RELEASE(pCollider);
+            return NULL;
+        }
+
+        pCollider->AddRef();
+        m_ColliderList.push_back(pCollider);
+
+        return pCollider;
+    }
+
+    bool CheckCollider()
+    {
+        return !m_ColliderList.empty();
+    }
+
+    /* 충돌체 관련 끝*/
+
 
 public:
     virtual bool Init() = 0;

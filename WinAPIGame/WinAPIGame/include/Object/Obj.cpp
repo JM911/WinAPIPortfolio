@@ -28,6 +28,7 @@ Obj::Obj(const Obj& obj)
 Obj::~Obj()
 {
 	SAFE_RELEASE(m_pTexture);
+	Safe_Release_VecList(m_ColliderList);
 	SAFE_RELEASE(m_pAnimation);
 }
 
@@ -169,7 +170,17 @@ void Obj::Input(float fDeltaTime)
 
 int Obj::Update(float fDeltaTime)
 {
-	// TODO: 충돌체 업데이트
+	list<Collider*>::iterator iter;
+	list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+	{
+		// TODO: Object에 Enable 변수 추가하면 반영
+
+		(*iter)->Update(fDeltaTime);
+
+		// TODO: Object에 Life 변수 추가하면 반영
+	}
 
 	if (m_pAnimation)
 		m_pAnimation->Update(fDeltaTime);
@@ -179,7 +190,18 @@ int Obj::Update(float fDeltaTime)
 
 int Obj::LateUpdate(float fDeltaTime)
 {
-	// TODO: 충돌체와 애니메이션 업데이트
+	list<Collider*>::iterator iter;
+	list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+	{
+		// TODO: Object에 Enable 변수 추가하면 반영
+
+		(*iter)->LateUpdate(fDeltaTime);
+
+		// TODO: Object에 Life 변수 추가하면 반영
+	}
+
 	return 0;
 }
 
@@ -206,7 +228,7 @@ void Obj::Render(HDC hDC, float fDeltaTime)
 	else if (tPos.y > tClientRS.iH)
 		bInClient = false;
 
-	// TODO: 나중에 텍스쳐 설정하면 텍스쳐와 애니메이션을 그리도록 수정
+	// 텍스쳐 및 애니메이션 출력
 	if (m_pTexture && bInClient)
 	{
 		POSITION tImagePos;
@@ -236,6 +258,20 @@ void Obj::Render(HDC hDC, float fDeltaTime)
 		}
 	}
 
-	// TODO: 충돌체 출력
+	// 충돌체 출력
+	if (bInClient)
+	{
+		list<Collider*>::iterator iter;
+		list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+		for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+		{
+			// TODO: Object에 Enable 변수 추가하면 반영
+			
+			(*iter)->Render(hDC, fDeltaTime);
+
+			// TODO: Object에 Life 변수 추가하면 반영
+		}
+	}
 
 }

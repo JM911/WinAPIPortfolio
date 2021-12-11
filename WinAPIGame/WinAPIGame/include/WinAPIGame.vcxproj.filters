@@ -64,6 +64,18 @@
     <Filter Include="05. Animation">
       <UniqueIdentifier>{297d3b9c-56fd-4676-891a-2ca6deef15e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Collider">
+      <UniqueIdentifier>{e6f08290-c258-41c4-925d-3b0a61b83bf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Collider\01. Colliders">
+      <UniqueIdentifier>{b7093232-8985-4cf6-b081-e6f8a98c68d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02. StaticObj\02. Ground">
+      <UniqueIdentifier>{a1f15826-4384-45cc-b8a0-e132b68f4407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02. StaticObj\03. Platform">
+      <UniqueIdentifier>{06fb3254-8555-448d-a374-7decf9be9f3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,6 +137,18 @@
     </ClCompile>
     <ClCompile Include="Animation\Animation.cpp">
       <Filter>05. Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\Collider.cpp">
+      <Filter>06. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\ColliderRect.cpp">
+      <Filter>06. Collider\01. Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\CollisionManager.cpp">
+      <Filter>06. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Ground.cpp">
+      <Filter>03. Object\02. StaticObj\02. Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +223,18 @@
     </ClInclude>
     <ClInclude Include="Animation\Animation.h">
       <Filter>05. Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\Collider.h">
+      <Filter>06. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\ColliderRect.h">
+      <Filter>06. Collider\01. Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\CollisionManager.h">
+      <Filter>06. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Ground.h">
+      <Filter>03. Object\02. StaticObj\02. Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

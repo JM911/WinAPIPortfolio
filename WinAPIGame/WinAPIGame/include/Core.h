@@ -39,6 +39,10 @@ public:
 	{
 		return m_tRS;
 	}
+	RESOLUTION GetWorldResolution()	const
+	{
+		return m_tWorldRS;
+	}
 
 	void DestroyGame()	// 게임 종료용
 	{

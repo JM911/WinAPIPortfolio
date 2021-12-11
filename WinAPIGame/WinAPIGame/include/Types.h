@@ -87,3 +87,18 @@ typedef struct _tagAnimationClip		// 모션 하나를 저장하는 역할 (구조체 1개 = 모�
 	_SIZE			tFrameSize;			// 실제 출력할 그림 크기
 	_SIZE			tFrameInterval;		// 그림 간의 간격
 }ANIMATIONCLIP, *PANIMATIONCLIP;
+
+//typedef struct _tagRectangle
+//{
+//	float l;
+//	float t;
+//	float r;
+//	float b;
+//
+//	_tagRectangle() :
+//		l(0.f),
+//		t(0.f),
+//		r(0.f),
+//		b(0.f)
+//	{ }
+//}RECTANGLE, *PRECTANGLE;

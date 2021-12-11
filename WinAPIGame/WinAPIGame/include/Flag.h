@@ -17,3 +17,23 @@ enum class ANI_OPTION
 	TIME_RETURN,	// 일정 시간 돌고 디폴트 모션으로 돌아감
 	TIME_DESTROY	// 일정 시간 돌고 오브젝트 삭제(버프 이펙트, 일정 시간동안 발동하는 스킬 등)
 };
+
+// 충돌체 타입
+enum class COL_TYPE
+{
+	RECT,
+	SPHERE,
+	LINE,
+	POINT,
+	PIXEL,
+	END
+};
+
+// 충돌 상태
+enum class COL_STATE: unsigned int
+{
+	ENTER,
+	STAY,
+	LEAVE,
+	END
+};
