@@ -16,11 +16,22 @@ CInput::~CInput()
 bool CInput::Init()
 {
     // TODO: AddKey를 통해 원하는 키 맵핑
+    // 기본 움직임
     AddKey("MoveLeft", VK_LEFT);
     AddKey("MoveRight", VK_RIGHT);
-    AddKey("Jump", 'Z');
+    AddKey("Jump", 'C');
+
+    // 4방향 대시
     AddKey("DashLeft", VK_LEFT, 'X');
     AddKey("DashRight", VK_RIGHT, 'X');
+    AddKey("DashUp", VK_UP, 'X');
+    AddKey("DashDown", VK_DOWN, 'X');
+
+    // 대각선 4방향 대시
+    AddKey("DashUpRight", VK_UP, VK_RIGHT, 'X');
+    AddKey("DashUpLeft", VK_UP, VK_LEFT, 'X');
+    AddKey("DashDownRight", VK_DOWN, VK_RIGHT, 'X');
+    AddKey("DashDownLeft", VK_DOWN, VK_LEFT, 'X');
 
     // TODO: 마우스 관련 작업
 

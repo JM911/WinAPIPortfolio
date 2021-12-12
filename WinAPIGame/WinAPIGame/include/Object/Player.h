@@ -29,6 +29,11 @@ public:
 
     // 아래로는 플레이어 조작 관련 변수, 함수
 private:
-    float fDashTime;
+    float   fDashTime;
+    bool    bJumpEnable;
+    bool    bDashEnable;
+
+private:
+    void StandOnGround(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 };
 

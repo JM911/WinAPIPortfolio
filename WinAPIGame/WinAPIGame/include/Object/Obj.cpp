@@ -164,6 +164,39 @@ void Obj::SetAnimationClipColorKey(const string& strClip, unsigned char r, unsig
 		m_pAnimation->SetClipColorKey(strClip, r, g, b);
 }
 
+Collider* Obj::GetCollider(const string& strTag)
+{
+	list<Collider*>::iterator iter;
+	list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+	{
+		if ((*iter)->GetTag() == strTag)
+		{
+			// (*iter)->AddRef();
+			return (*iter);
+		}
+	}
+
+	return NULL;
+}
+
+void Obj::EraseCollider(const string& strTag)
+{
+	list<Collider*>::iterator iter;
+	list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+	for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+	{
+		if ((*iter)->GetTag() == strTag)
+		{
+			SAFE_DELETE((*iter));
+			m_ColliderList.erase(iter);
+			return;
+		}
+	}
+}
+
 void Obj::Input(float fDeltaTime)
 {
 }

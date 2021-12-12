@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TestScene.h"
+#include "../Collider/CollisionManager.h"
 
 DEFINITION_SINGLE(SceneManager)
 
@@ -27,20 +28,18 @@ void SceneManager::Input(float fDeltaTime)
 	m_pScene->Input(fDeltaTime);
 }
 
-int SceneManager::Update(float fDeltaTime)
+SCENE_CHANGE SceneManager::Update(float fDeltaTime)
 {
 	m_pScene->Update(fDeltaTime);
 
-	// TODO: SceneChange 만들면 반환값 수정
-	return 0;
+	return ChangeScene();
 }
 
-int SceneManager::LateUpdate(float fDeltaTime)
+SCENE_CHANGE SceneManager::LateUpdate(float fDeltaTime)
 {
 	m_pScene->LateUpdate(fDeltaTime);
 
-	// TODO: SceneChange 만들면 반환값 수정
-	return 0;
+	return ChangeScene();
 }
 
 void SceneManager::Collision(float fDeltaTime)
@@ -51,4 +50,23 @@ void SceneManager::Collision(float fDeltaTime)
 void SceneManager::Render(HDC hDC, float fDeltaTime)
 {
 	m_pScene->Render(hDC, fDeltaTime);
+}
+
+SCENE_CHANGE SceneManager::ChangeScene()
+{
+	if (m_pNextScene)
+	{
+		SAFE_DELETE(m_pScene);
+		m_pScene = m_pNextScene;
+		m_pNextScene = NULL;
+
+		GET_SINGLE(CollisionManager)->Clear();
+
+		m_pScene->SetSceneType(SCENE_TYPE::CURRENT);
+		// Scene::ChangePrototype();
+
+		return SCENE_CHANGE::CHANGE;
+	}
+
+	return SCENE_CHANGE::NONE;
 }

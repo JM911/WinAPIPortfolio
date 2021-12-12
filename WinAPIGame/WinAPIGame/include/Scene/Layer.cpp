@@ -1,5 +1,6 @@
 #include "Layer.h"
 #include "../Object/Obj.h"
+#include "../Collider/CollisionManager.h"
 
 Layer::Layer()	:
 	m_pScene(NULL),
@@ -81,8 +82,10 @@ void Layer::Collision(float fDeltaTime)
 	for (iter = m_ObjList.begin(); iter != iterEnd; ++iter)
 	{
 		// TODO: Object에 Enable 변수 추가하면 반영
-		(*iter)->Collision(fDeltaTime);
+		//(*iter)->Collision(fDeltaTime);
 		// TODO: Object에 Life 변수 추가하면 반영
+
+		GET_SINGLE(CollisionManager)->AddObj(*iter);
 	}
 }
 

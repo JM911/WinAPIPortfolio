@@ -37,7 +37,7 @@ LRESULT Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 Core::Core()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(353);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
+	//_CrtSetBreakAlloc(631);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
 							 // 괄호 안에 메모리 블럭 번호를 대입하고 프로그램을 실행해보면 메모리 누수가 생기는 코드로 이동함
 							 // 호출 스택에서 전 단계들을 확인하여 원인을 찾아내자.
 
@@ -175,8 +175,10 @@ void Core::Logic()
 
 	// TODO: 씬이 바뀔때 Update와 LateUpdate의 return 처리
 	Input(fDeltaTime);
-	Update(fDeltaTime);
-	LateUpdate(fDeltaTime);
+	if (Update(fDeltaTime) == SCENE_CHANGE::CHANGE)
+		return;
+	if (LateUpdate(fDeltaTime) == SCENE_CHANGE::CHANGE)
+		return;
 	Collision(fDeltaTime);
 	Render(fDeltaTime);
 }
@@ -188,17 +190,19 @@ void Core::Input(float fDeltaTime)
 	GET_SINGLE(Camera)->Input(fDeltaTime);
 }
 
-int Core::Update(float fDeltaTime)
+SCENE_CHANGE Core::Update(float fDeltaTime)
 {
-	GET_SINGLE(SceneManager)->Update(fDeltaTime);
+	SCENE_CHANGE sc;
+	sc = GET_SINGLE(SceneManager)->Update(fDeltaTime);
 	GET_SINGLE(Camera)->Update(fDeltaTime);
-	return 0;
+	return sc;
 }
 
-int Core::LateUpdate(float fDeltaTime)
+SCENE_CHANGE Core::LateUpdate(float fDeltaTime)
 {
-	GET_SINGLE(SceneManager)->LateUpdate(fDeltaTime);
-	return 0;
+	SCENE_CHANGE sc;
+	sc = GET_SINGLE(SceneManager)->LateUpdate(fDeltaTime);
+	return sc;
 }
 
 void Core::Collision(float fDeltaTime)

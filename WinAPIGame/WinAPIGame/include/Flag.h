@@ -30,10 +30,25 @@ enum class COL_TYPE
 };
 
 // 충돌 상태
-enum class COL_STATE: unsigned int
+enum class COL_STATE
 {
 	ENTER,
 	STAY,
 	LEAVE,
 	END
+};
+
+// 씬 타입
+enum class SCENE_TYPE
+{
+	CURRENT,
+	NEXT,
+	END
+};
+
+// 씬 변경 여부
+enum class SCENE_CHANGE
+{
+	NONE,
+	CHANGE
 };

@@ -20,13 +20,17 @@ Ground::~Ground()
 bool Ground::Init()
 {
 	// 월드 좌우로 100 튀어나오고 월드 아래로 100 튀어나오게 만듦 => 나중에 좌우 벽도 만들게 되면 적절히 예쁘게 수정할 수도 있음
-	SetPos(-100.f, GETWORLDRES.iH - m_iHeight);
+	SetPos(-100.f, (float)GETWORLDRES.iH - m_iHeight);
 	SetSize(GETWORLDRES.iW + 200.f, m_iHeight + 100.f);
 	SetPivot(0.0f, 0.0f);
 
 	// 똑같은 크기의 RECT 충돌체 설정
+	EraseCollider("GroundBody");
+
 	ColliderRect* pRC = AddCollider<ColliderRect>("GroundBody");
-	pRC->SetRect(0, 0, m_tSize.x, m_tSize.y);
+	pRC->SetRect(0, 0, (int)m_tSize.x, (int)m_tSize.y);
+
+	SAFE_RELEASE(pRC);
 
 	return true;
 }

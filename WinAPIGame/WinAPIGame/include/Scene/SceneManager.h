@@ -10,7 +10,7 @@ private:
 
 private:
 	class Scene*	m_pScene;		// 현재 씬
-	class scene*	m_pNextScene;	// 다음 씬
+	class Scene*	m_pNextScene;	// 다음 씬
 
 // Get 함수
 public:
@@ -23,20 +23,21 @@ public:
 	// TODO: Update, LateUpdate의 반환값으로 SCENE_CHANGE형 타입을 만들어서 넣어줌(장면전환 필요할 때 수정)
 	bool Init();
 	void Input(float fDeltaTime);
-	int Update(float fDeltaTime);
-	int LateUpdate(float fDeltaTime);
+	SCENE_CHANGE Update(float fDeltaTime);
+	SCENE_CHANGE LateUpdate(float fDeltaTime);
 	void Collision(float fDeltaTime);
 	void Render(HDC hDC, float fDeltaTime);
 
-	// TODO: 장면전환 함수, CreateScene 템플릿 추가
+	// TODO: 장면전환 함수 추가
+	SCENE_CHANGE ChangeScene();
 
 public:
 	template <typename T>
-	T* CreateScene()
+	T* CreateScene(SCENE_TYPE st = SCENE_TYPE::CURRENT)
 	{
 		T* pScene = new T;
 
-		// TODO: SceneType만들면 적절한 함수 호출
+		pScene->SetSceneType(st);
 
 		if (!pScene->Init())
 		{
@@ -44,10 +45,17 @@ public:
 			return NULL;
 		}
 
-		// TODO: SceneType에 따라 m_pScene에 넣을지 m_pNextScene에 넣을지 결정하는 코드 작성
-		SAFE_DELETE(m_pScene);
-		m_pScene = pScene;
-		// 일단은 그냥 m_pScene에 대입함
+		switch (st)
+		{
+		case SCENE_TYPE::CURRENT:
+			SAFE_DELETE(m_pScene);
+			m_pScene = pScene;
+			break;
+		case SCENE_TYPE::NEXT:
+			SAFE_DELETE(m_pNextScene);
+			m_pNextScene = pScene;
+			break;
+		}
 
 		return pScene;
 	}

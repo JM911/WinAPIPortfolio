@@ -6,7 +6,9 @@
 
 Player::Player()	:	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
-	fDashTime(0.f)
+	fDashTime(0.f),
+	bJumpEnable(true),
+	bDashEnable(true)
 {
 }
 
@@ -50,6 +52,8 @@ bool Player::Init()
 
 	pRC->SetRect(-16, -16, 16, 16);
 	// TODO: 충돌이 일어났을 때의 함수 추가 및 AddCollisionFunction 호출
+	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::StandOnGround);
+	pRC->AddCollisionFunction(COL_STATE::STAY, this, &Player::StandOnGround);
 
 	SAFE_RELEASE(pRC);
 
@@ -60,10 +64,17 @@ void Player::Input(float fDeltaTime)
 {
 	Creature::Input(fDeltaTime);
 
+	// TODO: 움직임 하드코딩 한 거 함수 따로 만들어서 호출, 숫자 하드코딩 전부 변수로 변경
 	if (KEYPRESS("MoveLeft"))		// 왼쪽 방향키
 	{
 		m_tPos.x -= 200 * fDeltaTime;
+		//m_tSpeed.x = -200;
 		m_iDir = -1;
+	}
+
+	if (KEYUP("MoveLeft"))
+	{
+		//m_tSpeed.x += 200;
 	}
 
 	if (KEYPRESS("MoveRight"))		// 오른쪽 방향키
@@ -72,33 +83,89 @@ void Player::Input(float fDeltaTime)
 		m_iDir = 1;
 	}
 
-	if (KEYDOWN("Jump"))			// Z
+	if (KEYUP("MoveRight"))
 	{
-		m_tSpeed.y = -1000.f;
+		//m_tSpeed.x -= 200;
 	}
 
-	if (KEYPRESS("DashRight"))		// → + X
+	if (KEYDOWN("Jump") && bJumpEnable)			// C
 	{
+		m_tSpeed.y = -700.f;
+		bJumpEnable = false;
+	}
+
+	if (KEYPRESS("DashRight") && bDashEnable)		// → + X
+	{
+		m_tSpeed.x = 2000;
+		m_tSpeed.y = 0;
 		fDashTime += fDeltaTime;
-		if (fDashTime <= 0.1f)
-			m_tPos.x += 2000 * fDeltaTime;
+		if (fDashTime > 0.1f)
+		{
+			m_tSpeed.x -= 2000;
+			bDashEnable = false;
+		}
 	}
 
 	if (KEYUP("DashRight"))
 	{
 		fDashTime = 0.f;
+		m_tSpeed.x = 0;
+		bDashEnable = false;
 	}
 
-	if (KEYPRESS("DashLeft"))		// ← + X
+	if (KEYPRESS("DashLeft") && bDashEnable)		// ← + X
 	{
+		m_tSpeed.x = -2000;
+		m_tSpeed.y = 0;
 		fDashTime += fDeltaTime;
-		if (fDashTime <= 0.1f)
-			m_tPos.x -= 2000 * fDeltaTime;
+		if (fDashTime > 0.1f)
+		{
+			m_tSpeed.x += 2000;
+			bDashEnable = false;
+		}
 	}
 
 	if (KEYUP("DashLeft"))
 	{
 		fDashTime = 0.f;
+		m_tSpeed.x = 0;
+		bDashEnable = false;
+	}
+
+	if (KEYPRESS("DashUp") && bDashEnable)		// ↑ + X
+	{
+		m_tSpeed.y = -2000;
+		fDashTime += fDeltaTime;
+		if (fDashTime > 0.1f)
+		{
+			m_tSpeed.y += 2000;
+			bDashEnable = false;
+		}
+	}
+
+	if (KEYUP("DashUp"))
+	{
+		fDashTime = 0.f;
+		m_tSpeed.y = 0;
+		bDashEnable = false;
+	}
+
+	if (KEYPRESS("DashDown") && bDashEnable)		// ↓ + X
+	{
+		m_tSpeed.y = 2000;
+		fDashTime += fDeltaTime;
+		if (fDashTime > 0.1f)
+		{
+			m_tSpeed.y -= 2000;
+			bDashEnable = false;
+		}
+	}
+
+	if (KEYUP("DashDown"))
+	{
+		fDashTime = 0.f;
+		m_tSpeed.y = 0;
+		bDashEnable = false;
 	}
 	
 }
@@ -134,4 +201,32 @@ void Player::Render(HDC hDC, float fDeltaTime)
 MoveObj* Player::Clone()
 {
 	return new Player(*this);
+}
+
+void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
+{
+	if (pDest->GetObj()->GetTag() == "Ground")
+	{
+		RECT tRC = { 0, 0, 0, 0 };
+		list<Collider*>::iterator iter;
+		list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+		for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+		{
+			if ((*iter)->GetTag() == "PlayerBody")
+			{
+				tRC = ((ColliderRect*)(*iter))->GetIntersectInfo();
+				break;
+			}
+		}
+
+		//int iInterW = tRC.right - tRC.left;
+		int iInterH = tRC.bottom - tRC.top;
+
+		m_tPos.y -= iInterH;
+		m_tSpeed.y = 0.f;
+
+		bJumpEnable = true;
+		bDashEnable = true;
+	}
 }

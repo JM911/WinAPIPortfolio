@@ -163,6 +163,7 @@
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\StaticObj.cpp" />
     <ClCompile Include="Object\TestBackground.cpp" />
+    <ClCompile Include="Object\Wall.cpp" />
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="Resources\ResourcesManager.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Object\Player.h" />
     <ClInclude Include="Object\StaticObj.h" />
     <ClInclude Include="Object\TestBackground.h" />
+    <ClInclude Include="Object\Wall.h" />
     <ClInclude Include="Ref.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\ResourcesManager.h" />

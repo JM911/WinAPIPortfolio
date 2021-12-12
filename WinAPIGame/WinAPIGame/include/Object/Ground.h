@@ -5,6 +5,7 @@ class Ground :
     public StaticObj
 {
 private:
+    friend class Obj;
     friend class Scene;
 
 protected:
@@ -12,7 +13,7 @@ protected:
     Ground(const Ground& ground);
     ~Ground();
 
-private:
+protected:
     int m_iHeight;      // 월드 밑바닥부터의 높이
 
 public:

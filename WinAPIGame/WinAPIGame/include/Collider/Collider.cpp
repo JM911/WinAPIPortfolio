@@ -81,10 +81,10 @@ bool Collider::CollisionRectToRect(const RECT& src, const RECT& dest, LPRECT pIn
 
 	if (pIntersect)
 	{
-		pIntersect->left = 0.f;
-		pIntersect->right = 0.f;
-		pIntersect->top = 0.f;
-		pIntersect->bottom = 0.f;
+		pIntersect->left = 0;
+		pIntersect->right = 0;
+		pIntersect->top = 0;
+		pIntersect->bottom = 0;
 	}
 	
 	return false;

@@ -33,9 +33,9 @@ int MoveObj::Update(float fDeltaTime)
     m_tPos.x += m_tSpeed.x * fDeltaTime;
     m_tPos.y += m_tSpeed.y * fDeltaTime;
 
-    if (m_tPos.y > 900)
+    if (m_tPos.y > 1080)
     {
-        m_tPos.y = 900;
+        m_tPos.y = 1080;
         m_tSpeed.y = 0;
     }
 

@@ -1,7 +1,8 @@
 #include "Scene.h"
 #include "Layer.h"
 
-Scene::Scene()
+Scene::Scene()	:
+	m_eSceneType(SCENE_TYPE::CURRENT)
 {
 	// TODO: 필요한 레이어들 여기에 만들기
 	Layer* pLayer = CreateLayer("Default", 1);

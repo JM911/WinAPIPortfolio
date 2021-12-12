@@ -15,6 +15,21 @@ protected:
 
 protected:
 	list<class Layer*>	m_LayerList;
+	SCENE_TYPE			m_eSceneType;
+
+	// Get 함수
+public:
+	SCENE_TYPE GetSceneType()	const
+	{
+		return m_eSceneType;
+	}
+
+	// Set 함수
+public:
+	void SetSceneType(SCENE_TYPE eSceneType)
+	{
+		m_eSceneType = eSceneType;
+	}
 
 public:
 	class Layer* CreateLayer(const string& strTag, int iZOrder = 0);

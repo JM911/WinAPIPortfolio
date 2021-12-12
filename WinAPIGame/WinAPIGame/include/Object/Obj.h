@@ -145,6 +145,7 @@ public:
         return &m_ColliderList;
     }
     Collider* GetCollider(const string& strTag);
+    void EraseCollider(const string& strTag);
 
 public:
     template <typename T>

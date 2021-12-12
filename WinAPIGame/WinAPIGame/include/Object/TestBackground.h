@@ -5,7 +5,7 @@ class TestBackground :
     public StaticObj
 {
 private:
-    //friend class Obj;
+    friend class Obj;
     friend class Scene;
 
  protected:   
