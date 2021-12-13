@@ -1,7 +1,7 @@
 #pragma once
 #include "StaticObj.h"
 
-class Wall :
+class TestPlatform :
     public StaticObj
 {
 private:
@@ -9,22 +9,19 @@ private:
     friend class Scene;
 
 protected:
-    Wall();
-    Wall(const Wall& ground);
-    ~Wall();
-
-protected:
-    int m_iHeight;
+    TestPlatform();
+    TestPlatform(const TestPlatform& platform);
+    ~TestPlatform();
 
 public:
     virtual bool Init();
-    bool Init(int tHeight);
+    bool Init(POSITION tPos, _SIZE tSize);
     virtual void Input(float fDeltaTime);
     virtual int Update(float fDeltaTime);
     virtual int LateUpdate(float fDeltaTime);
     virtual void Collision(float fDeltaTime);
     virtual void Render(HDC hDC, float fDeltaTime);
 
-    virtual Wall* Clone();
+    virtual TestPlatform* Clone();
 };
 

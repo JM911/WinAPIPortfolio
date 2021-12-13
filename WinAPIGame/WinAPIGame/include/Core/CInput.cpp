@@ -27,11 +27,10 @@ bool CInput::Init()
     AddKey("DashUp", VK_UP, 'X');
     AddKey("DashDown", VK_DOWN, 'X');
 
-    // 대각선 4방향 대시
-    AddKey("DashUpRight", VK_UP, VK_RIGHT, 'X');
-    AddKey("DashUpLeft", VK_UP, VK_LEFT, 'X');
-    AddKey("DashDownRight", VK_DOWN, VK_RIGHT, 'X');
-    AddKey("DashDownLeft", VK_DOWN, VK_LEFT, 'X');
+    // 벽잡기
+    AddKey("WallCliff", 'Z');
+    AddKey("WallCliffUp", VK_UP, 'Z');
+    AddKey("WallCliffDown", VK_DOWN, 'Z');
 
     // TODO: 마우스 관련 작업
 

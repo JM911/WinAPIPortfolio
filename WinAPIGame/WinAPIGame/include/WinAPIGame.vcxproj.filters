@@ -76,9 +76,6 @@
     <Filter Include="03. Object\02. StaticObj\03. Platform">
       <UniqueIdentifier>{06fb3254-8555-448d-a374-7decf9be9f3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Object\02. StaticObj\04. Wall">
-      <UniqueIdentifier>{cc2e73a9-f657-4bd0-9bea-82cc29981a0d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -153,8 +150,8 @@
     <ClCompile Include="Object\Ground.cpp">
       <Filter>03. Object\02. StaticObj\02. Ground</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Wall.cpp">
-      <Filter>03. Object\02. StaticObj\04. Wall</Filter>
+    <ClCompile Include="Object\TestPlatform.cpp">
+      <Filter>03. Object\02. StaticObj\03. Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,8 +239,8 @@
     <ClInclude Include="Object\Ground.h">
       <Filter>03. Object\02. StaticObj\02. Ground</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Wall.h">
-      <Filter>03. Object\02. StaticObj\04. Wall</Filter>
+    <ClInclude Include="Object\TestPlatform.h">
+      <Filter>03. Object\02. StaticObj\03. Platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

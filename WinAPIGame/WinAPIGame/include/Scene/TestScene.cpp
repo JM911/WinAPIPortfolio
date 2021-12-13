@@ -4,6 +4,7 @@
 #include "../Object/TestBackground.h"
 #include "../Core/Camera.h"
 #include "../Object/Ground.h"
+#include "../Object/TestPlatform.h"
 
 TestScene::TestScene()
 {
@@ -30,6 +31,15 @@ bool TestScene::Init()
 	Ground* pGround = Obj::CreateObj<Ground>("Ground", pLayer);
 	pGround->Init(300);
 	SAFE_RELEASE(pGround);
+
+	// ÇÃ·§Æû
+	TestPlatform* pPlatform = Obj::CreateObj<TestPlatform>("Platform1", pLayer);
+	pPlatform->Init(POSITION(700.f, 500.f), _SIZE(100.f, 280.f));
+	SAFE_RELEASE(pPlatform);
+
+	pPlatform = Obj::CreateObj<TestPlatform>("Platform2", pLayer);
+	pPlatform->Init(POSITION(500.f, 500.f), _SIZE(100.f, 280.f));
+	SAFE_RELEASE(pPlatform);
 
 	// ¹è°æ
 	pLayer = FindLayer("Background");

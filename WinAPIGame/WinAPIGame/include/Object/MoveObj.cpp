@@ -1,9 +1,9 @@
 #include "MoveObj.h"
 
 MoveObj::MoveObj()  :  // TODO: 변수들 모두 초기화했는지 확인!
-    m_fMass(0),
-    m_tSpeed(0, 0),
-    m_tAccel(0, 2000)
+    m_fMass(0.f),
+    m_tSpeed(0.f, 0.f),
+    m_tAccel(0.f, 2000.f)
 {
 }
 
@@ -26,7 +26,6 @@ void MoveObj::Input(float fDeltaTime)
 
 int MoveObj::Update(float fDeltaTime)
 {
-    // TODO: 가속도, 속도 처리
     m_tSpeed.x += m_tAccel.x * fDeltaTime;
     m_tSpeed.y += m_tAccel.y * fDeltaTime;
 
