@@ -47,7 +47,7 @@ Player::~Player()
 bool Player::Init()
 {
 	SetPos(200.f, 100.f);
-	SetSize(32.f, 32.f);
+	SetSize(64.f, 64.f);
 	SetSpeed(0.f, 0.f);
 	SetPivot(0.5f, 0.5f);
 
@@ -57,23 +57,37 @@ bool Player::Init()
 	Animation* pAni = CreateAnimation("PlayerAnimation");
 
 	// 애니메이션 추가 (프레임 타입)
+	// 오른쪽 걷기
 	vector<wstring> vecFileName;
 
 	for (int i = 0; i < 12; i++)
 	{
 		wchar_t strFileName[MAX_PATH] = {};
-		wsprintf(strFileName, L"PlayerWalk/%d.bmp", i);
+		wsprintf(strFileName, L"Player/Walk/Right/%d.bmp", i);
 		vecFileName.push_back(strFileName);
 	}
 
-	AddAnimationClipFrame("WalkRight", ANI_OPTION::LOOP, 1.f, 12, 0.f, _SIZE(32.f, 32.f), "PlayerWalkRight", vecFileName);
+	AddAnimationClipFrame("WalkRight", ANI_OPTION::LOOP, 1.f, 12, 0.f, _SIZE(64.f, 64.f), "PlayerWalkRight", vecFileName);
 	SetAnimationClipColorKey("WalkRight", 255, 255, 255);
+
+	// 왼쪽 벽타기
+	vecFileName.clear();
+
+	for (int i = 0; i < 14; i++)
+	{
+		wchar_t strFileName[MAX_PATH] = {};
+		wsprintf(strFileName, L"Player/Climb/LeftWall/%d.bmp", i);
+		vecFileName.push_back(strFileName);
+	}
+
+	AddAnimationClipFrame("LeftWallClimb", ANI_OPTION::LOOP, 1.f, 14, 0.f, _SIZE(64.f, 64.f), "PlayerLeftWallClimb", vecFileName);
+	SetAnimationClipColorKey("LeftWallClimb", 255, 255, 255);
 
 
 	// 충돌체 추가 (Rect 타입)
 	ColliderRect* pRC = AddCollider<ColliderRect>("PlayerBody");
 
-	pRC->SetRect(-16, -16, 16, 16);
+	pRC->SetRect(-18, -5, 10, 32);
 	// TODO: 충돌이 일어났을 때의 함수 추가 및 AddCollisionFunction 호출
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::StandOnGround);
 	pRC->AddCollisionFunction(COL_STATE::STAY, this, &Player::StandOnGround);
@@ -222,6 +236,8 @@ void Player::Input(float fDeltaTime)
 	if (KEYPRESS("WallCliff"))
 	{
 		m_bWallCliff = true;
+		m_pAnimation->ChangeClip("LeftWallClimb");
+		m_pAnimation->SetDefaultClip("WalkRight");
 	}
 	if (KEYUP("WallCliff"))
 	{
@@ -232,18 +248,21 @@ void Player::Input(float fDeltaTime)
 	if (KEYPRESS("WallCliffUp") && m_bOnWall)
 	{
 		m_tPos.y -= 200 * fDeltaTime;
+		
 	}
 	if (KEYPRESS("WallCliffDown") && m_bOnWall)
 	{
 		m_tPos.y += 200 * fDeltaTime;
 	}
-
-
 }
 
 int Player::Update(float fDeltaTime)
 {
 	Creature::Update(fDeltaTime);
+
+	if (!m_bOnWall)
+		m_pAnimation->ReturnClip();
+
 	return 0;
 }
 
