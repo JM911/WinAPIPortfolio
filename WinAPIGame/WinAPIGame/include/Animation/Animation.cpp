@@ -217,8 +217,7 @@ void Animation::Update(float fDeltaTime)
 		m_pCurClip->fAnimationTime -= m_pCurClip->fAnimationFrameTime;
 
 		// 프레임 형식이면 매번 텍스쳐를 교체해줘야 한다.
-		if (m_pCurClip->eType == ANI_TYPE::FRAME
-			&& m_pCurClip->iCurFrameX != m_pCurClip->iMaxFrameX)
+		if (m_pCurClip->eType == ANI_TYPE::FRAME && m_pCurClip->iCurFrameX != m_pCurClip->iMaxFrameX)
 			m_pObj->SetTexture(m_pCurClip->vecTexture[m_pCurClip->iCurFrameX]);
 
 		++m_pCurClip->iCurFrameX;

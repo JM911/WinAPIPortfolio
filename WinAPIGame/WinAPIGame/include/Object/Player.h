@@ -13,7 +13,7 @@ public:     // TODO: 테스트 끝나면 protected로 수정
     Player(const Player& player);
     ~Player();
 
-// TODO: 방향 등 필요한 요소 추가
+    // TODO: 방향 등 필요한 요소 추가
 private:
     int m_iDir;
 
@@ -30,8 +30,6 @@ public:
     // 아래로는 플레이어 조작 관련 변수, 함수
 private:
     float   m_fDashTime;
-    float   fWallJumpTime;
-
     bool    m_bJumpEnable;
     bool    m_bDashEnable;
 
@@ -45,6 +43,7 @@ private:
     bool    m_bDashDownRight;
     bool    m_bDashDownLeft;
 
+    float   fWallJumpTime;
     bool    m_bWallCliff;
     bool    m_bOnWall;
     bool    m_bLeftWallJumpEnable;
@@ -52,7 +51,12 @@ private:
     bool    m_bRightWallJumpEnable;
     bool    m_bRightWallJumping;
 
-    PLAYER_STATUS m_eStatus;
+    PLAYER_ANI_STATUS m_eAniStatus;
+
+    float   m_fJumpTime;
+    bool    m_bWalking;
+    bool    m_bOnGround;
+    bool    m_bJumping;
 
 private:
     void DashRight(float fDeltaTime);
@@ -65,10 +69,9 @@ private:
     void DashDownRight(float fDeltaTime);
     void DashDownLeft(float fDeltaTime);
 
-    void EndDash();
-
 private:
     void StandOnGround(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
+    void OffGround(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
     void CollisionWithPlatform(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
     void OffWall(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 };
