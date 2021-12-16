@@ -30,6 +30,8 @@ public:
     // 아래로는 플레이어 조작 관련 변수, 함수
 private:
     float   m_fDashTime;
+    float   fWallJumpTime;
+
     bool    m_bJumpEnable;
     bool    m_bDashEnable;
 
@@ -43,13 +45,14 @@ private:
     bool    m_bDashDownRight;
     bool    m_bDashDownLeft;
 
-    float   fWallJumpTime;
     bool    m_bWallCliff;
     bool    m_bOnWall;
     bool    m_bLeftWallJumpEnable;
     bool    m_bLeftWallJumping;
     bool    m_bRightWallJumpEnable;
     bool    m_bRightWallJumping;
+
+    PLAYER_STATUS m_eStatus;
 
 private:
     void DashRight(float fDeltaTime);
@@ -61,6 +64,8 @@ private:
     void DashUpLeft(float fDeltaTime);
     void DashDownRight(float fDeltaTime);
     void DashDownLeft(float fDeltaTime);
+
+    void EndDash();
 
 private:
     void StandOnGround(class Collider* pSrc, class Collider* pDest, float fDeltaTime);

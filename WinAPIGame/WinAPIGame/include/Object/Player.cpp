@@ -3,11 +3,12 @@
 #include "../Resources/Texture.h"
 #include "../Animation/Animation.h"
 #include "../Collider/ColliderRect.h"
+#include "../Core/Camera.h"
 
 Player::Player()	:	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
 	m_fDashTime(0.f), fWallJumpTime(0.f),
-	m_bJumpEnable(true), m_bDashEnable(true),
+	m_bJumpEnable(true), m_bDashEnable(true), m_eStatus(PLAYER_STATUS::IDLE_RIGHT),
 	m_bDashRight(false), m_bDashLeft(false), m_bDashUp(false), m_bDashDown(false),
 	m_bDashUpRight(false), m_bDashUpLeft(false), m_bDashDownRight(false), m_bDashDownLeft(false),
 	m_bWallCliff(false), m_bOnWall(false), m_bLeftWallJumpEnable(false), m_bRightWallJumpEnable(false),
@@ -107,13 +108,12 @@ void Player::Input(float fDeltaTime)
 
 	// TODO: 움직임 하드코딩 한 거 함수 따로 만들어서 호출, 숫자 하드코딩 전부 변수로 변경
 	// 벽점프
-	if (KEYDOWN("Jump") && m_bLeftWallJumpEnable)
+	if (KEYDOWN("Jump") && m_eStatus == PLAYER_STATUS::ON_LEFTWALL)
 	{
 		m_tSpeed.y = -700.f;
-		m_bLeftWallJumping = true;
-		m_bLeftWallJumpEnable = false;
+		m_eStatus = PLAYER_STATUS::JUMP_LEFTWALL;
 	}
-	if (m_bLeftWallJumping)
+	if (m_eStatus == PLAYER_STATUS::JUMP_LEFTWALL)
 	{
 		if (fWallJumpTime < 0.1f)
 		{
@@ -122,18 +122,17 @@ void Player::Input(float fDeltaTime)
 		}
 		else
 		{
-			m_bLeftWallJumping = false;
+			m_eStatus = PLAYER_STATUS::FALLING_LEFT;
 			fWallJumpTime = 0.f;
 		}
 	}
 	
-	if (KEYDOWN("Jump") && m_bRightWallJumpEnable)
+	if (KEYDOWN("Jump") && m_eStatus == PLAYER_STATUS::ON_RIGHTWALL)
 	{
 		m_tSpeed.y = -700.f;
-		m_bRightWallJumping = true;
-		m_bRightWallJumpEnable = false;
+		m_eStatus = PLAYER_STATUS::JUMP_RIGHTWALL;
 	}
-	if (m_bRightWallJumping)
+	if (m_eStatus == PLAYER_STATUS::JUMP_RIGHTWALL)
 	{
 		if (fWallJumpTime < 0.1f)
 		{
@@ -142,7 +141,7 @@ void Player::Input(float fDeltaTime)
 		}
 		else
 		{
-			m_bRightWallJumping = false;
+			m_eStatus = PLAYER_STATUS::FALLING_RIGHT;
 			fWallJumpTime = 0.f;
 		}
 	}
@@ -150,18 +149,23 @@ void Player::Input(float fDeltaTime)
 	// 기본 움직임
 	if (KEYPRESS("MoveLeft"))		// 왼쪽 방향키
 	{
+		m_eStatus = PLAYER_STATUS::WALK_LEFT;
 		m_tPos.x -= 200 * fDeltaTime;
 		m_iDir = -1;
 	}
 
 	if (KEYPRESS("MoveRight"))		// 오른쪽 방향키
 	{
+		m_eStatus = PLAYER_STATUS::WALK_RIGHT;
 		m_tPos.x += 200 * fDeltaTime;
 		m_iDir = 1;
 	}
 
 	if (KEYDOWN("Jump") && m_bJumpEnable)			// C
 	{
+		if(m_iDir == -1)	m_eStatus = PLAYER_STATUS::JUMP_LEFT;
+		if(m_iDir == 1)		m_eStatus = PLAYER_STATUS::JUMP_RIGHT;
+
 		m_tSpeed.y = -700.f;
 		m_bJumpEnable = false;
 	}
@@ -169,67 +173,67 @@ void Player::Input(float fDeltaTime)
 	// 대각선 4방향 대시 (키입력 메커니즘 때문에 앞쪽에 코딩)
 	if (KEYDOWN("DashUp") && KEYDOWN("DashRight") && m_bDashEnable)
 	{
-		m_bDashUpRight = true;
+		m_eStatus = PLAYER_STATUS::DASH_UPRIGHT;
 		m_bDashEnable = false;
 	}
-	if (m_bDashUpRight)
+	if (m_eStatus == PLAYER_STATUS::DASH_UPRIGHT)
 		DashUpRight(fDeltaTime);
 
 	if (KEYDOWN("DashUp") && KEYDOWN("DashLeft") && m_bDashEnable)
 	{
-		m_bDashUpLeft = true;
+		m_eStatus = PLAYER_STATUS::DASH_UPLEFT;
 		m_bDashEnable = false;
 	}
-	if (m_bDashUpLeft)
+	if (m_eStatus == PLAYER_STATUS::DASH_UPLEFT)
 		DashUpLeft(fDeltaTime);
 
 	if (KEYDOWN("DashDown") && KEYDOWN("DashRight") && m_bDashEnable)
 	{
-		m_bDashDownRight = true;
+		m_eStatus = PLAYER_STATUS::DASH_DOWNRIGHT;
 		m_bDashEnable = false;
 	}
-	if (m_bDashDownRight)
+	if (m_eStatus == PLAYER_STATUS::DASH_DOWNRIGHT)
 		DashDownRight(fDeltaTime);
 
 	if (KEYDOWN("DashDown") && KEYDOWN("DashLeft") && m_bDashEnable)
 	{
-		m_bDashDownLeft = true;
+		m_eStatus = PLAYER_STATUS::DASH_DOWNLEFT;
 		m_bDashEnable = false;
 	}
-	if (m_bDashDownLeft)
+	if (m_eStatus == PLAYER_STATUS::DASH_DOWNLEFT)
 		DashDownLeft(fDeltaTime);
 
 	// 4방향 대시
 	if (KEYDOWN("DashRight") && m_bDashEnable)
 	{
-		 m_bDashRight = true;
-		 m_bDashEnable = false;
+		m_eStatus = PLAYER_STATUS::DASH_RIGHT;
+		m_bDashEnable = false;
 	}
-	if (m_bDashRight)
+	if (m_eStatus == PLAYER_STATUS::DASH_RIGHT)
 		DashRight(fDeltaTime);
 
 	if (KEYDOWN("DashLeft") && m_bDashEnable)
 	{
-		 m_bDashLeft = true;
-		 m_bDashEnable = false;
+		m_eStatus = PLAYER_STATUS::DASH_LEFT;
+		m_bDashEnable = false;
 	}
-	if (m_bDashLeft)
+	if (m_eStatus == PLAYER_STATUS::DASH_LEFT)
 		DashLeft(fDeltaTime);
 
 	if (KEYDOWN("DashUp") && m_bDashEnable)
 	{
-		m_bDashUp = true;
+		m_eStatus = PLAYER_STATUS::DASH_UP;
 		m_bDashEnable = false;
 	}
-	if (m_bDashUp)
+	if (m_eStatus == PLAYER_STATUS::DASH_UP)
 		DashUp(fDeltaTime);
 
 	if (KEYDOWN("DashDown") && m_bDashEnable)
 	{
-		m_bDashDown = true;
+		m_eStatus = PLAYER_STATUS::DASH_DOWN;
 		m_bDashEnable = false;
 	}
-	if (m_bDashDown)
+	if (m_eStatus == PLAYER_STATUS::DASH_DOWN)
 		DashDown(fDeltaTime);
 
 	// 벽잡기
@@ -245,12 +249,11 @@ void Player::Input(float fDeltaTime)
 		m_tAccel.y = 2000.f;
 	}
 
-	if (KEYPRESS("WallCliffUp") && m_bOnWall)
+	if (KEYPRESS("WallCliffUp") && (m_eStatus == PLAYER_STATUS::ON_LEFTWALL || m_eStatus == PLAYER_STATUS::ON_RIGHTWALL))
 	{
 		m_tPos.y -= 200 * fDeltaTime;
-		
 	}
-	if (KEYPRESS("WallCliffDown") && m_bOnWall)
+	if (KEYPRESS("WallCliffDown") && (m_eStatus == PLAYER_STATUS::ON_LEFTWALL || m_eStatus == PLAYER_STATUS::ON_RIGHTWALL))
 	{
 		m_tPos.y += 200 * fDeltaTime;
 	}
@@ -259,6 +262,12 @@ void Player::Input(float fDeltaTime)
 int Player::Update(float fDeltaTime)
 {
 	Creature::Update(fDeltaTime);
+
+	// 대시 종료 판정
+	if (m_fDashTime >= 0.1f)
+	{
+		EndDash();
+	}
 
 	if (!m_bOnWall)
 		m_pAnimation->ReturnClip();
@@ -280,6 +289,16 @@ void Player::Collision(float fDeltaTime)
 void Player::Render(HDC hDC, float fDeltaTime)
 {
 	Creature::Render(hDC, fDeltaTime);
+
+	// 플레이어 상태 출력
+	wchar_t strStatus[32] = {};
+	wsprintf(strStatus, L"Status: %d", (int)m_eStatus);
+
+	POSITION tPos;
+	tPos.x = m_tPos.x - m_tSize.x * m_tPivot.x - GET_SINGLE(Camera)->GetPos().x;
+	tPos.y = m_tPos.y - m_tSize.y * m_tPivot.y - GET_SINGLE(Camera)->GetPos().y;
+
+	TextOut(hDC, (int)tPos.x, (int)tPos.y, strStatus, lstrlen(strStatus));
 
 	/*POSITION tPos;
 	tPos.x = m_tPos.x - m_tSize.x * m_tPivot.x;
@@ -303,12 +322,6 @@ void Player::DashRight(float fDeltaTime)
 	m_fDashTime += fDeltaTime;
 	m_tSpeed.y = 0.f;
 
-	if (m_fDashTime >= 0.1f)
-	{
-		m_bDashRight = false;
-		m_tSpeed.x = 0.f;
-		m_fDashTime = 0;
-	}
 }
 void Player::DashLeft(float fDeltaTime)
 {
@@ -319,13 +332,6 @@ void Player::DashLeft(float fDeltaTime)
 
 	m_fDashTime += fDeltaTime;
 	m_tSpeed.y = 0.f;
-
-	if (m_fDashTime >= 0.1f)
-	{
-		m_bDashLeft = false;
-		m_tSpeed.x = 0.f;
-		m_fDashTime = 0;
-	}
 }
 void Player::DashUp(float fDeltaTime)
 {
@@ -435,6 +441,14 @@ void Player::DashDownLeft(float fDeltaTime)
 	}
 }
 
+void Player::EndDash()
+{
+	if (m_iDir == -1)	m_eStatus = PLAYER_STATUS::FALLING_LEFT;
+	if (m_iDir == 1)	m_eStatus = PLAYER_STATUS::FALLING_RIGHT;
+	m_tSpeed.x = 0.f;
+	m_fDashTime = 0.f;
+}
+
 void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
 {
 	if (pDest->GetObj()->GetTag() == "Ground")
@@ -457,6 +471,9 @@ void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
 
 		m_tPos.y -= iInterH;
 		m_tSpeed.y = 0.f;
+
+		if(m_iDir == -1)	m_eStatus = PLAYER_STATUS::IDLE_LEFT;
+		if(m_iDir == 1)		m_eStatus = PLAYER_STATUS::IDLE_RIGHT;
 
 		m_bJumpEnable = true;
 		m_bDashEnable = true;
@@ -498,11 +515,15 @@ void Player::CollisionWithPlatform(Collider* pSrc, Collider* pDest, float fDelta
 		if (iInterW > iInterH)	// (플랫폼 기준) 위아래에서 충돌
 		{
 			m_tSpeed.y = 0.f;
-			m_bJumpEnable = true;
-			m_bDashEnable = true;
 
 			if (tRC.top == platformRect.top)	// 위에서 충돌
 			{
+				if (m_iDir == -1)	m_eStatus = PLAYER_STATUS::IDLE_LEFT;
+				if (m_iDir == 1)		m_eStatus = PLAYER_STATUS::IDLE_RIGHT;
+
+				m_bJumpEnable = true;
+				m_bDashEnable = true;
+
 				m_tPos.y -= iInterH;
 			}
 			else if (tRC.bottom == platformRect.bottom)	// 아래에서 충돌
@@ -517,13 +538,13 @@ void Player::CollisionWithPlatform(Collider* pSrc, Collider* pDest, float fDelta
 			
 			if (tRC.left == platformRect.left)	// 왼쪽에서 충돌
 			{
-				m_bLeftWallJumpEnable = true;
+				m_eStatus = PLAYER_STATUS::ON_LEFTWALL;
 				m_tPos.x -= iInterW;
 				++m_tPos.x;
 			}
 			else if (tRC.right == platformRect.right)	// 오른쪽에서 충돌
 			{
-				m_bRightWallJumpEnable = true;
+				m_eStatus = PLAYER_STATUS::ON_RIGHTWALL;
 				m_tPos.x += iInterW;
 				--m_tPos.x;
 			}
@@ -555,9 +576,10 @@ void Player::OffWall(Collider* pSrc, Collider* pDest, float fDeltaTime)
 			}
 		}
 
+		if (m_iDir == -1)		m_eStatus = PLAYER_STATUS::FALLING_LEFT;
+		if (m_iDir == 1)		m_eStatus = PLAYER_STATUS::FALLING_RIGHT;
+
 		m_bOnWall = false;
-		m_bLeftWallJumpEnable = false;
-		m_bRightWallJumpEnable = false;
 		m_tAccel.y = 2000.f;
 	}
 }
