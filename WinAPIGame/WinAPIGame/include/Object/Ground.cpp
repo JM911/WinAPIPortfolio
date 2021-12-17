@@ -19,7 +19,7 @@ Ground::~Ground()
 
 bool Ground::Init()
 {
-	// 월드 좌우로 100 튀어나오고 월드 아래로 100 튀어나오게 만듦 => 나중에 좌우 벽도 만들게 되면 적절히 예쁘게 수정할 수도 있음
+	// 월드 좌우로 100 튀어나오고 월드 아래로 100 튀어나오게 만듦
 	SetPos(-100.f, (float)GETWORLDRES.iH - m_iHeight);
 	SetSize(GETWORLDRES.iW + 200.f, m_iHeight + 100.f);
 	SetPivot(0.0f, 0.0f);

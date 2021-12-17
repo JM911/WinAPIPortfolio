@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TestScene.h"
+#include "StartScene.h"
 #include "../Collider/CollisionManager.h"
 
 DEFINITION_SINGLE(SceneManager)
@@ -18,7 +19,7 @@ SceneManager::~SceneManager()
 bool SceneManager::Init()
 {
 	// TODO: StartScene 클래스 타입으로 CreateScene 템플릿 함수 호출
-	CreateScene<TestScene>();
+	CreateScene<StartScene>();
 
 	return true;
 }

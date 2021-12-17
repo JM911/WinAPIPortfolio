@@ -25,7 +25,7 @@ bool TestPlatform::Init(POSITION tPos, _SIZE tSize)
 	SetSize(tSize);
 	SetPivot(0.f, 0.f);
 
-	ColliderRect* pRC = AddCollider<ColliderRect>("PlatformBody");		// 이렇게 하면 클래스 한 개에 플랫폼 하나 밖에 못만듦
+	ColliderRect* pRC = AddCollider<ColliderRect>("PlatformBody");	
 	pRC->SetRect(0, 0, (int)m_tSize.x, (int)m_tSize.y);
 
 	SAFE_RELEASE(pRC);

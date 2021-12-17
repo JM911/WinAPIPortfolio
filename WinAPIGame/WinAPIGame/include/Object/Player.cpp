@@ -3,6 +3,7 @@
 #include "../Resources/Texture.h"
 #include "../Animation/Animation.h"
 #include "../Collider/ColliderRect.h"
+#include "../Core.h"
 
 Player::Player() :	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -119,7 +120,7 @@ bool Player::Init()
 	// 충돌체 추가 (Rect 타입)
 	ColliderRect* pRC = AddCollider<ColliderRect>("PlayerBody");
 
-	pRC->SetRect(-14, -5, 10, 32);
+	pRC->SetRect(-14, -5, 12, 32);
 	// TODO: 충돌이 일어났을 때의 함수 추가 및 AddCollisionFunction 호출
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::StandOnGround);
 	pRC->AddCollisionFunction(COL_STATE::STAY, this, &Player::StandOnGround);
@@ -356,6 +357,12 @@ int Player::Update(float fDeltaTime)
 int Player::LateUpdate(float fDeltaTime)
 {
 	Creature::LateUpdate(fDeltaTime);
+
+	if (m_tPos.x < 0)
+		m_tPos.x = 0;
+	if (m_tPos.x > GETWORLDRES.iW)
+		m_tPos.x = GETWORLDRES.iW;
+
 	return 0;
 }
 
@@ -543,6 +550,7 @@ void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
 		int iInterH = tRC.bottom - tRC.top;
 
 		m_tPos.y -= iInterH;
+		m_tPos.y++;
 		m_tSpeed.y = 0.f;
 
 		m_bJumpEnable = true;
@@ -663,5 +671,47 @@ void Player::OffWall(Collider* pSrc, Collider* pDest, float fDeltaTime)
 		m_bRightWallJumpEnable = false;
 		m_bOnGround = false;
 		m_tAccel.y = 2000.f;
+	}
+}
+
+void Player::CollisionWithWall(Collider* pSrc, Collider* pDest, float fDeltaTime)
+{
+	if (pDest->GetTag() == "WallBody")
+	{
+		RECT tRC = { 0, 0, 0, 0 };
+		list<Collider*>::iterator iter;
+		list<Collider*>::iterator iterEnd = m_ColliderList.end();
+
+		for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
+		{
+			if ((*iter)->GetTag() == "PlayerBody")
+			{
+				tRC = ((ColliderRect*)(*iter))->GetIntersectInfo();
+				break;
+			}
+		}
+
+		RECT platformRect = ((ColliderRect*)pDest)->GetWorldInfo();
+
+		int iInterW = tRC.right - tRC.left;
+		int iInterH = tRC.bottom - tRC.top;
+
+		if (iInterW < iInterH)	// (벽 기준) 좌우에서 충돌
+		{
+			m_tSpeed.x = 0.f;
+
+			if (tRC.left == platformRect.left)	// 왼쪽에서 충돌
+			{
+				m_bLeftWallJumpEnable = true;
+				m_tPos.x -= iInterW;
+				++m_tPos.x;
+			}
+			else if (tRC.right == platformRect.right)	// 오른쪽에서 충돌
+			{
+				m_bRightWallJumpEnable = true;
+				m_tPos.x += iInterW;
+				--m_tPos.x;
+			}
+		}
 	}
 }

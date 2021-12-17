@@ -124,5 +124,6 @@ public:
 
 protected:
     bool CollisionRectToRect(const RECT& src, const RECT& dest, LPRECT pIntersect);
+    bool CollisionRectToPoint(const RECT& src, const POSITION& dest);
 };
 

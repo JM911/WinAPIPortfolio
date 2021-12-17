@@ -89,3 +89,17 @@ bool Collider::CollisionRectToRect(const RECT& src, const RECT& dest, LPRECT pIn
 	
 	return false;
 }
+
+bool Collider::CollisionRectToPoint(const RECT& src, const POSITION& dest)
+{
+	if (dest.x < src.left)
+		return false;
+	else if (dest.x > src.right)
+		return false;
+	else if (dest.y < src.top)
+		return false;
+	else if (dest.y > src.bottom)
+		return false;
+
+	return true;
+}

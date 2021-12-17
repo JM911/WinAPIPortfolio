@@ -7,6 +7,7 @@ Scene::Scene()	:
 	// TODO: 필요한 레이어들 여기에 만들기
 	Layer* pLayer = CreateLayer("Default", 1);
 	pLayer = CreateLayer("Background");
+	pLayer = CreateLayer("UI", INT_MAX);
 }
 
 Scene::~Scene()

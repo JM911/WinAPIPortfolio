@@ -76,6 +76,21 @@
     <Filter Include="03. Object\02. StaticObj\03. Platform">
       <UniqueIdentifier>{06fb3254-8555-448d-a374-7decf9be9f3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\02. StaticObj\04. TilePlatform">
+      <UniqueIdentifier>{5ad74f3f-e97f-4dd5-88c1-8f5ecc6f1c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\03. UIObj">
+      <UniqueIdentifier>{8178d3ce-bd75-451d-99d0-1e8e2a7de3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\03. UIObj\01. Mouse">
+      <UniqueIdentifier>{aa37b55a-d27b-4ae9-9f17-f93dd3d60654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\03. UIObj\02. UIButton">
+      <UniqueIdentifier>{df01aee1-14c6-4776-8cb5-6aafccebc95c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\03. UIObj\03. UIPanel">
+      <UniqueIdentifier>{b773fea9-d641-4561-99b7-49031598d4ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -152,6 +167,30 @@
     </ClCompile>
     <ClCompile Include="Object\TestPlatform.cpp">
       <Filter>03. Object\02. StaticObj\03. Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Tile.cpp">
+      <Filter>03. Object\02. StaticObj\04. TilePlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\TilePlatform.cpp">
+      <Filter>03. Object\02. StaticObj\04. TilePlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StartScene.cpp">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UIObj.cpp">
+      <Filter>03. Object\03. UIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MouseObj.cpp">
+      <Filter>03. Object\03. UIObj\01. Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\ColliderPoint.cpp">
+      <Filter>06. Collider\01. Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UIPanel.cpp">
+      <Filter>03. Object\03. UIObj\03. UIPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UIButton.cpp">
+      <Filter>03. Object\03. UIObj\02. UIButton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +280,30 @@
     </ClInclude>
     <ClInclude Include="Object\TestPlatform.h">
       <Filter>03. Object\02. StaticObj\03. Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Tile.h">
+      <Filter>03. Object\02. StaticObj\04. TilePlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\TilePlatform.h">
+      <Filter>03. Object\02. StaticObj\04. TilePlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StartScene.h">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UIObj.h">
+      <Filter>03. Object\03. UIObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MouseObj.h">
+      <Filter>03. Object\03. UIObj\01. Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\ColliderPoint.h">
+      <Filter>06. Collider\01. Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UIPanel.h">
+      <Filter>03. Object\03. UIObj\03. UIPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UIButton.h">
+      <Filter>03. Object\03. UIObj\02. UIButton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

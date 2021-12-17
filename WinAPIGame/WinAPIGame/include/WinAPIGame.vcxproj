@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Animation\Animation.cpp" />
     <ClCompile Include="Collider\Collider.cpp" />
+    <ClCompile Include="Collider\ColliderPoint.cpp" />
     <ClCompile Include="Collider\ColliderRect.cpp" />
     <ClCompile Include="Collider\CollisionManager.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -158,23 +159,31 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\Creature.cpp" />
     <ClCompile Include="Object\Ground.cpp" />
+    <ClCompile Include="Object\MouseObj.cpp" />
     <ClCompile Include="Object\MoveObj.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\StaticObj.cpp" />
     <ClCompile Include="Object\TestBackground.cpp" />
     <ClCompile Include="Object\TestPlatform.cpp" />
+    <ClCompile Include="Object\Tile.cpp" />
+    <ClCompile Include="Object\TilePlatform.cpp" />
+    <ClCompile Include="Object\UIButton.cpp" />
+    <ClCompile Include="Object\UIObj.cpp" />
+    <ClCompile Include="Object\UIPanel.cpp" />
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="Resources\ResourcesManager.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />
     <ClCompile Include="Scene\Layer.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Scene\StartScene.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animation.h" />
     <ClInclude Include="Collider\Collider.h" />
+    <ClInclude Include="Collider\ColliderPoint.h" />
     <ClInclude Include="Collider\ColliderRect.h" />
     <ClInclude Include="Collider\CollisionManager.h" />
     <ClInclude Include="Core.h" />
@@ -187,12 +196,18 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Object\Creature.h" />
     <ClInclude Include="Object\Ground.h" />
+    <ClInclude Include="Object\MouseObj.h" />
     <ClInclude Include="Object\MoveObj.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\Player.h" />
     <ClInclude Include="Object\StaticObj.h" />
     <ClInclude Include="Object\TestBackground.h" />
     <ClInclude Include="Object\TestPlatform.h" />
+    <ClInclude Include="Object\Tile.h" />
+    <ClInclude Include="Object\TilePlatform.h" />
+    <ClInclude Include="Object\UIButton.h" />
+    <ClInclude Include="Object\UIObj.h" />
+    <ClInclude Include="Object\UIPanel.h" />
     <ClInclude Include="Ref.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\ResourcesManager.h" />
@@ -200,6 +215,7 @@
     <ClInclude Include="Scene\Layer.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\StartScene.h" />
     <ClInclude Include="Scene\TestScene.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>

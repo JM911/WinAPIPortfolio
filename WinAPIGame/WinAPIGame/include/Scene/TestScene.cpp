@@ -5,6 +5,7 @@
 #include "../Core/Camera.h"
 #include "../Object/Ground.h"
 #include "../Object/TestPlatform.h"
+#include "../Object/TilePlatform.h"
 
 TestScene::TestScene()
 {
@@ -38,14 +39,20 @@ bool TestScene::Init()
 	SAFE_RELEASE(pPlatform);
 
 	pPlatform = Obj::CreateObj<TestPlatform>("Platform2", pLayer);
-	pPlatform->Init(POSITION(500.f, 500.f), _SIZE(100.f, 280.f));
+	pPlatform->Init(POSITION(1500.f, 500.f), _SIZE(100.f, 280.f));
 	SAFE_RELEASE(pPlatform);
+
+	// 타일 플랫폼
+	TilePlatform* pTilePlatform = Obj::CreateObj<TilePlatform>("Platform2", pLayer);
+	pTilePlatform->Init(POSITION(900.f, 500.f), 4, 6);
+	SAFE_RELEASE(pTilePlatform);
 
 	// 배경
 	pLayer = FindLayer("Background");
 	TestBackground* pBackground = Obj::CreateObj<TestBackground>("TestBG", pLayer);
 	pBackground->Init(POSITION(0.f, 0.f), _SIZE(1920.f, 1080.f), POSITION(0.f, 0.f), "TestBG", L"bluemoon.bmp");
 	SAFE_RELEASE(pBackground);
+
 
 
 	// TODO: 배경 Init 처럼 초기화 정보를 따로 줘야 하는 상황에서는 어떻게 하지?
