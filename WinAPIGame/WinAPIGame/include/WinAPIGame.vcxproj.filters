@@ -94,6 +94,12 @@
     <Filter Include="03. Object\02. StaticObj\04. TilePlatform\01. Obstacles">
       <UniqueIdentifier>{53b63c5e-9a33-416e-b112-10a00e9760d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\02. StaticObj\05. Interactive">
+      <UniqueIdentifier>{03d744ad-a015-40a8-882e-38a55fb99a1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core\05. Math">
+      <UniqueIdentifier>{5f7435bc-6ced-471f-8477-ebf21447c634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -200,6 +206,18 @@
     </ClCompile>
     <ClCompile Include="Object\Needle.cpp">
       <Filter>03. Object\02. StaticObj\04. TilePlatform\01. Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Strawberry.cpp">
+      <Filter>03. Object\02. StaticObj\05. Interactive</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Dashball.cpp">
+      <Filter>03. Object\02. StaticObj\05. Interactive</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider\ColliderCircle.cpp">
+      <Filter>06. Collider\01. Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CMath.cpp">
+      <Filter>01. Core\05. Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +337,18 @@
     </ClInclude>
     <ClInclude Include="Object\Needle.h">
       <Filter>03. Object\02. StaticObj\04. TilePlatform\01. Obstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Strawberry.h">
+      <Filter>03. Object\02. StaticObj\05. Interactive</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Dashball.h">
+      <Filter>03. Object\02. StaticObj\05. Interactive</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\ColliderCircle.h">
+      <Filter>06. Collider\01. Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CMath.h">
+      <Filter>01. Core\05. Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

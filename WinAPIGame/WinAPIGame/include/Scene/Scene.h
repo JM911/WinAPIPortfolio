@@ -16,6 +16,7 @@ protected:
 protected:
 	list<class Layer*>	m_LayerList;
 	SCENE_TYPE			m_eSceneType;
+	string				m_strSceneTag;
 
 	// Get 함수
 public:
@@ -23,12 +24,20 @@ public:
 	{
 		return m_eSceneType;
 	}
+	string GetSceneTag()	const
+	{
+		return m_strSceneTag;
+	}
 
 	// Set 함수
 public:
 	void SetSceneType(SCENE_TYPE eSceneType)
 	{
 		m_eSceneType = eSceneType;
+	}
+	void SetSceneTag(const string& strTag)
+	{
+		m_strSceneTag = strTag;
 	}
 
 public:

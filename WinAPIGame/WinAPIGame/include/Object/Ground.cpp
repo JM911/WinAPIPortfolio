@@ -17,14 +17,14 @@ Ground::~Ground()
 {
 }
 
-void Ground::SetGroundInfo(float fStartX, int iWidth, int iHeight)
+void Ground::SetGroundInfo(float fStartX, float fEndX, int iHeight)
 {
 	m_fStartX = fStartX;
-	m_iWidth = iWidth;
+	m_fEndX = fEndX;
 	m_iHeight = iHeight;
 	
 	SetPos(m_fStartX, (float)GETWORLDRES.iH - m_iHeight);
-	SetSize((float)m_iWidth, m_iHeight + 100.f);
+	SetSize(m_fEndX - m_fStartX, m_iHeight + 100.f);
 
 	// 똑같은 크기의 RECT 충돌체 설정
 	ColliderRect* pRC = AddCollider<ColliderRect>("GroundBody");

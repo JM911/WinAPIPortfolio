@@ -6,6 +6,7 @@
 #include "../Core.h"
 #include "../Scene/SceneManager.h"
 #include "../Scene/GameOverScene.h"
+#include "../Scene/TestScene.h"
 
 Player::Player() :	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -428,7 +429,7 @@ void Player::DashUp(float fDeltaTime)
 {
 	if (m_fDashTime == 0.f)
 	{
-		m_tSpeed.y = -3000.f;
+		m_tSpeed.y = -2000.f;
 	}
 
 	m_fDashTime += fDeltaTime;
@@ -463,8 +464,8 @@ void Player::DashUpRight(float fDeltaTime)
 {
 	if (m_fDashTime == 0.f)
 	{
-		m_tSpeed.x = 1000.f;
-		m_tSpeed.y = -2000.f;
+		m_tSpeed.x = 1400.f;
+		m_tSpeed.y = -1400.f;
 	}
 
 	m_fDashTime += fDeltaTime;
@@ -481,8 +482,8 @@ void Player::DashUpLeft(float fDeltaTime)
 {
 	if (m_fDashTime == 0.f)
 	{
-		m_tSpeed.x = -1000.f;
-		m_tSpeed.y = -2000.f;
+		m_tSpeed.x = -1400.f;
+		m_tSpeed.y = -1400.f;
 	}
 
 	m_fDashTime += fDeltaTime;
@@ -534,7 +535,10 @@ void Player::DashDownLeft(float fDeltaTime)
 
 void Player::Die()
 {
-	GET_SINGLE(SceneManager)->CreateScene<GameOverScene>(SCENE_TYPE::NEXT);
+	if (m_pScene->GetSceneTag() == "Stage1")
+		GET_SINGLE(SceneManager)->CreateScene<TestScene>(SCENE_TYPE::NEXT);
+	else
+		GET_SINGLE(SceneManager)->CreateScene<GameOverScene>(SCENE_TYPE::NEXT);
 }
 
 void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
@@ -554,27 +558,50 @@ void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
 			}
 		}
 
-		//int iInterW = tRC.right - tRC.left;
+		RECT groundRect = ((ColliderRect*)pDest)->GetWorldInfo();
+
+		int iInterW = tRC.right - tRC.left;
 		int iInterH = tRC.bottom - tRC.top;
 
-		m_tPos.y -= iInterH;
-		m_tPos.y++;
-		m_tSpeed.y = 0.f;
-
-		m_bJumpEnable = true;
-		m_bDashEnable = true;
-		m_bOnGround = true;
-
-		if(m_iDir == 1) m_pAnimation->SetDefaultClip("RightIdle");
-		if(m_iDir == -1) m_pAnimation->SetDefaultClip("LeftIdle");
-
-		if (m_bDashDown || m_bDashDownLeft || m_bDashDownRight)
+		if (iInterW >= iInterH)	// 위아래에서 충돌
 		{
-			m_bDashDown = false;
-			m_bDashDownLeft = false;
-			m_bDashDownRight = false;
-			m_fDashTime = 0.f;
+
+			m_tPos.y -= iInterH;
+			m_tPos.y++;
+			m_tSpeed.y = 0.f;
+
+			m_bJumpEnable = true;
+			m_bDashEnable = true;
+			m_bOnGround = true;
+
+
+			if (m_iDir == 1) m_pAnimation->SetDefaultClip("RightIdle");
+			if (m_iDir == -1) m_pAnimation->SetDefaultClip("LeftIdle");
+
+			if (m_bDashDown || m_bDashDownLeft || m_bDashDownRight)
+			{
+				m_bDashDown = false;
+				m_bDashDownLeft = false;
+				m_bDashDownRight = false;
+				m_fDashTime = 0.f;
+				m_tSpeed.x = 0.f;
+			}
+		}
+
+		if (iInterW < iInterH)	// 좌우에서 충돌
+		{
 			m_tSpeed.x = 0.f;
+
+			if (tRC.left == groundRect.left)	// 왼쪽에서 충돌
+			{
+				m_tPos.x -= iInterW;
+				++m_tPos.x;
+			}
+			else if (tRC.right == groundRect.right)	// 오른쪽에서 충돌
+			{
+				m_tPos.x += iInterW;
+				--m_tPos.x;
+			}
 		}
 	}
 }

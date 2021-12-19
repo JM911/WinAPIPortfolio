@@ -102,3 +102,14 @@ typedef struct _tagAnimationClip		// 모션 하나를 저장하는 역할 (구조체 1개 = 모�
 //		b(0.f)
 //	{ }
 //}RECTANGLE, *PRECTANGLE;
+
+typedef struct _tagCircle
+{
+	POSITION	tCenter;
+	float		fRadius;
+
+	_tagCircle()	:
+		tCenter(0.f, 0.f),
+		fRadius(0.f)
+	{ }
+}CIRCLE, *PCIRCLE;

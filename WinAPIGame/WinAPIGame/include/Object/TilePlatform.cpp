@@ -2,7 +2,10 @@
 #include "Tile.h"
 #include "../Collider/ColliderRect.h"
 
-TilePlatform::TilePlatform()
+TilePlatform::TilePlatform()	:
+	m_strTileKey(""),
+	m_wstrTileTexFileName(L""),
+	m_bTileSetting(false)
 {
 }
 
@@ -22,12 +25,14 @@ TilePlatform::~TilePlatform()
 	Safe_Release_VecList(m_vecTile);
 }
 
-bool TilePlatform::Init()
+void TilePlatform::SetTileTexture(const string& strKey, const wchar_t* pFileName)
 {
-	return true;
+	m_strTileKey = strKey;
+	m_wstrTileTexFileName = pFileName;
+	m_bTileSetting = true;
 }
 
-bool TilePlatform::Init(POSITION tPos, int iTileNumX, int iTileNumY)
+void TilePlatform::SetPlatform(POSITION tPos, int iTileNumX, int iTileNumY)
 {
 	SetPos(tPos);
 	SetSize((float)(32 * iTileNumX), (float)(32 * iTileNumY));
@@ -38,6 +43,9 @@ bool TilePlatform::Init(POSITION tPos, int iTileNumX, int iTileNumY)
 		{
 			Tile* pTile = new Tile;
 			pTile->Init();
+			if(m_bTileSetting)
+				pTile->SetTexture(m_strTileKey.c_str(), m_wstrTileTexFileName.c_str());
+			
 			pTile->SetPos(tPos.x + 1 + i * 32, tPos.y + 1 + j * 32);
 			m_vecTile.push_back(pTile);
 		}
@@ -46,7 +54,10 @@ bool TilePlatform::Init(POSITION tPos, int iTileNumX, int iTileNumY)
 	ColliderRect* pRC = AddCollider<ColliderRect>("PlatformBody");
 	pRC->SetRect(0, 0, (int)m_tSize.x, (int)m_tSize.y);
 	SAFE_RELEASE(pRC);
+}
 
+bool TilePlatform::Init()
+{
 	return true;
 }
 

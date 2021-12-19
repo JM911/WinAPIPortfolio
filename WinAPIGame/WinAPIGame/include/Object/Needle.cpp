@@ -21,7 +21,7 @@ bool Needle::Init()
 
 bool Needle::Init(POSITION tPos, int iTileNumX, int iTileNumY)
 {
-	TilePlatform::Init(tPos, iTileNumX, iTileNumY);
+	TilePlatform::SetPlatform(tPos, iTileNumX, iTileNumY);
 
 	EraseCollider("PlatformBody");
 

@@ -110,8 +110,8 @@ bool Core::Init(HINSTANCE hInst)
 	m_tRS.iH = 720;
 
 	// 월드 맵크기 설정
-	m_tWorldRS.iW = 1920;
-	m_tWorldRS.iH = 1080;
+	m_tWorldRS.iW = 3840;
+	m_tWorldRS.iH = 720;
 
 	Create();
 

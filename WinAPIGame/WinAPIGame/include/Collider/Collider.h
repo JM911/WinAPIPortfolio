@@ -125,5 +125,9 @@ public:
 protected:
     bool CollisionRectToRect(const RECT& src, const RECT& dest, LPRECT pIntersect);
     bool CollisionRectToPoint(const RECT& src, const POSITION& dest);
+    bool CollisionRectToCircle(const RECT& src, const CIRCLE& dest);
+
+    bool CollisionCircleToCircle(const CIRCLE& src, const CIRCLE& dest);
+    bool CollisionCircleToPoint(const CIRCLE& src, const POSITION& dest);
 };
 

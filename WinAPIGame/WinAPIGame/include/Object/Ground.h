@@ -15,12 +15,12 @@ protected:
 
 protected:
     float m_fStartX;    // 땅 시작위치 x 좌표
-    int m_iWidth;       // 땅 길이
+    float m_fEndX;      // 땅 끝위치 x 좌표
     int m_iHeight;      // 월드 밑바닥부터의 높이
 
     // Set 함수
 public:
-    void SetGroundInfo(float fStartX, int iWidth, int iHeight);
+    void SetGroundInfo(float fStartX, float fEndX, int iHeight);
 
 public:
     virtual bool Init();

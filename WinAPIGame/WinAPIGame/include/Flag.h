@@ -22,7 +22,7 @@ enum class ANI_OPTION
 enum class COL_TYPE
 {
 	RECT,
-	SPHERE,
+	CIRCLE,
 	LINE,
 	POINT,
 	PIXEL,

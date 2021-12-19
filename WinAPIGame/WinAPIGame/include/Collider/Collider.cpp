@@ -1,4 +1,5 @@
 #include "Collider.h"
+#include "../Core/CMath.h"
 
 Collider::Collider()
 {
@@ -102,4 +103,54 @@ bool Collider::CollisionRectToPoint(const RECT& src, const POSITION& dest)
 		return false;
 
 	return true;
+}
+
+bool Collider::CollisionRectToCircle(const RECT& src, const CIRCLE& dest)
+{
+	if ((src.left <= dest.tCenter.x && dest.tCenter.x <= src.right)
+		|| (src.top <= dest.tCenter.y && dest.tCenter.y <= src.bottom))
+	{
+		RECT tRC = src;
+		tRC.left	-= (int)dest.fRadius;
+		tRC.top		-= (int)dest.fRadius;
+		tRC.right	+= (int)dest.fRadius;
+		tRC.bottom	+= (int)dest.fRadius;
+
+		if (dest.tCenter.x < tRC.left)
+			return false;
+		else if (dest.tCenter.x > tRC.right)
+			return false;
+		else if (dest.tCenter.y < tRC.top)
+			return false;
+		else if (dest.tCenter.y > tRC.bottom)
+			return false;
+
+		return true;
+	}
+
+	POSITION tPos[4];
+	tPos[0] = POSITION(src.left, src.top);
+	tPos[1] = POSITION(src.right, src.top);
+	tPos[2] = POSITION(src.right, src.bottom);
+	tPos[3] = POSITION(src.left, src.bottom);
+
+	for (int i = 0; i < 4; i++)
+	{
+		float fDist = CMath::Distance(tPos[i], dest.tCenter);
+
+		if (fDist <= dest.fRadius)
+			return true;
+	}
+
+	return false;
+}
+
+bool Collider::CollisionCircleToCircle(const CIRCLE& src, const CIRCLE& dest)
+{
+	return CMath::Distance(src.tCenter, dest.tCenter) <= src.fRadius + dest.fRadius;
+}
+
+bool Collider::CollisionCircleToPoint(const CIRCLE& src, const POSITION& dest)
+{
+	return CMath::Distance(src.tCenter, dest) <= src.fRadius;
 }
