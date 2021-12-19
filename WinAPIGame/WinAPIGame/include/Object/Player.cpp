@@ -4,6 +4,8 @@
 #include "../Animation/Animation.h"
 #include "../Collider/ColliderRect.h"
 #include "../Core.h"
+#include "../Scene/SceneManager.h"
+#include "../Scene/GameOverScene.h"
 
 Player::Player() :	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -121,7 +123,6 @@ bool Player::Init()
 	ColliderRect* pRC = AddCollider<ColliderRect>("PlayerBody");
 
 	pRC->SetRect(-14, -5, 12, 32);
-	// TODO: 충돌이 일어났을 때의 함수 추가 및 AddCollisionFunction 호출
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::StandOnGround);
 	pRC->AddCollisionFunction(COL_STATE::STAY, this, &Player::StandOnGround);
 	pRC->AddCollisionFunction(COL_STATE::LEAVE, this, &Player::OffGround);
@@ -129,6 +130,8 @@ bool Player::Init()
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithPlatform);
 	pRC->AddCollisionFunction(COL_STATE::STAY, this, &Player::CollisionWithPlatform);
 	pRC->AddCollisionFunction(COL_STATE::LEAVE, this, &Player::OffWall);
+
+	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithNeedle);
 
 	SAFE_RELEASE(pRC);
 
@@ -361,7 +364,7 @@ int Player::LateUpdate(float fDeltaTime)
 	if (m_tPos.x < 0)
 		m_tPos.x = 0;
 	if (m_tPos.x > GETWORLDRES.iW)
-		m_tPos.x = GETWORLDRES.iW;
+		m_tPos.x = (float)GETWORLDRES.iW;
 
 	return 0;
 }
@@ -529,9 +532,14 @@ void Player::DashDownLeft(float fDeltaTime)
 	}
 }
 
+void Player::Die()
+{
+	GET_SINGLE(SceneManager)->CreateScene<GameOverScene>(SCENE_TYPE::NEXT);
+}
+
 void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
 {
-	if (pDest->GetObj()->GetTag() == "Ground")
+	if (pDest->GetTag() == "GroundBody")
 	{
 		RECT tRC = { 0, 0, 0, 0 };
 		list<Collider*>::iterator iter;
@@ -674,44 +682,10 @@ void Player::OffWall(Collider* pSrc, Collider* pDest, float fDeltaTime)
 	}
 }
 
-void Player::CollisionWithWall(Collider* pSrc, Collider* pDest, float fDeltaTime)
+void Player::CollisionWithNeedle(Collider* pSrc, Collider* pDest, float fDeltaTime)
 {
-	if (pDest->GetTag() == "WallBody")
+	if (pDest->GetTag() == "NeedleBody")
 	{
-		RECT tRC = { 0, 0, 0, 0 };
-		list<Collider*>::iterator iter;
-		list<Collider*>::iterator iterEnd = m_ColliderList.end();
-
-		for (iter = m_ColliderList.begin(); iter != iterEnd; ++iter)
-		{
-			if ((*iter)->GetTag() == "PlayerBody")
-			{
-				tRC = ((ColliderRect*)(*iter))->GetIntersectInfo();
-				break;
-			}
-		}
-
-		RECT platformRect = ((ColliderRect*)pDest)->GetWorldInfo();
-
-		int iInterW = tRC.right - tRC.left;
-		int iInterH = tRC.bottom - tRC.top;
-
-		if (iInterW < iInterH)	// (벽 기준) 좌우에서 충돌
-		{
-			m_tSpeed.x = 0.f;
-
-			if (tRC.left == platformRect.left)	// 왼쪽에서 충돌
-			{
-				m_bLeftWallJumpEnable = true;
-				m_tPos.x -= iInterW;
-				++m_tPos.x;
-			}
-			else if (tRC.right == platformRect.right)	// 오른쪽에서 충돌
-			{
-				m_bRightWallJumpEnable = true;
-				m_tPos.x += iInterW;
-				--m_tPos.x;
-			}
-		}
+		Die();
 	}
 }

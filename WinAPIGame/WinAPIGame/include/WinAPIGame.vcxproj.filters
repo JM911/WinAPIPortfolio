@@ -91,6 +91,9 @@
     <Filter Include="03. Object\03. UIObj\03. UIPanel">
       <UniqueIdentifier>{b773fea9-d641-4561-99b7-49031598d4ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\02. StaticObj\04. TilePlatform\01. Obstacles">
+      <UniqueIdentifier>{53b63c5e-9a33-416e-b112-10a00e9760d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -191,6 +194,12 @@
     </ClCompile>
     <ClCompile Include="Object\UIButton.cpp">
       <Filter>03. Object\03. UIObj\02. UIButton</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameOverScene.cpp">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Needle.cpp">
+      <Filter>03. Object\02. StaticObj\04. TilePlatform\01. Obstacles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +313,12 @@
     </ClInclude>
     <ClInclude Include="Object\UIButton.h">
       <Filter>03. Object\03. UIObj\02. UIButton</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameOverScene.h">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Needle.h">
+      <Filter>03. Object\02. StaticObj\04. TilePlatform\01. Obstacles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

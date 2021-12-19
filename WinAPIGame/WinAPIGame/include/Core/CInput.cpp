@@ -1,4 +1,7 @@
 #include "CInput.h"
+#include "../Object/Obj.h"
+#include "../Object/MouseObj.h"
+#include "../Collider/CollisionManager.h"
 
 DEFINITION_SINGLE(CInput)
 
@@ -9,7 +12,8 @@ CInput::CInput()    :
 
 CInput::~CInput()
 {
-    // TODO: 마우스 관련 작업
+    Obj::EraseObj(m_pMouse);
+    SAFE_RELEASE(m_pMouse);
     Safe_Delete_Map(m_mapKey);
 }
 
@@ -32,7 +36,14 @@ bool CInput::Init()
     AddKey("WallCliffUp", VK_UP, 'Z');
     AddKey("WallCliffDown", VK_DOWN, 'Z');
 
-    // TODO: 마우스 관련 작업
+    // 마우스 버튼
+    AddKey("MouseLClick", VK_LBUTTON);
+    AddKey("MouseRClick", VK_RBUTTON);
+
+    // 마우스 생성
+    m_pMouse = Obj::CreateObj<MouseObj>("Mouse");
+
+    // TODO: (마우스 커서 이미지 바꾸고 싶은 경우) 마우스 텍스처 or 애니메이션 관련 작업
 
     return true;
 }
@@ -79,7 +90,10 @@ void CInput::Update(float fDeltaTime)
         }
     }
 
-    // TODO: 마우스 관련 작업
+    m_pMouse->Update(fDeltaTime);
+    m_pMouse->LateUpdate(fDeltaTime);
+
+    GET_SINGLE(CollisionManager)->AddObj(m_pMouse);
 }
 
 bool CInput::KeyDown(const string& strKey) const

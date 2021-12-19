@@ -37,7 +37,7 @@ LRESULT Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 Core::Core()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(631);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
+	//_CrtSetBreakAlloc(395);  // 평소에는 주석 걸어놓고 메모리 누수가 있을 때 활성화하여 메모리 누수를 찾아주기.
 							 // 괄호 안에 메모리 블럭 번호를 대입하고 프로그램을 실행해보면 메모리 누수가 생기는 코드로 이동함
 							 // 호출 스택에서 전 단계들을 확인하여 원인을 찾아내자.
 

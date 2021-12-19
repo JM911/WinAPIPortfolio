@@ -29,6 +29,11 @@ private:
 	unordered_map<string, PKEYINFO>	m_mapKey;
 	PKEYINFO	m_pCreateKey;
 
+	// 마우스 관련
+	class MouseObj*	m_pMouse;
+	POINT			m_tMousePos;
+	POINT			m_tMouseMove;
+
 public:
 	bool Init();
 	void Update(float fDeltaTime);

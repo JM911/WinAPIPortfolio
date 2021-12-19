@@ -6,6 +6,7 @@
 #include "../Object/Ground.h"
 #include "../Object/TestPlatform.h"
 #include "../Object/TilePlatform.h"
+#include "../Object/Needle.h"
 
 TestScene::TestScene()
 {
@@ -29,8 +30,12 @@ bool TestScene::Init()
 	SAFE_RELEASE(pPlayer);
 
 	// ¶¥
-	Ground* pGround = Obj::CreateObj<Ground>("Ground", pLayer);
-	pGround->Init(300);
+	Ground* pGround = Obj::CreateObj<Ground>("Ground1", pLayer);
+	pGround->SetGroundInfo(-100.f, 500, 200);
+	SAFE_RELEASE(pGround);
+
+	pGround = Obj::CreateObj<Ground>("Ground2", pLayer);
+	pGround->SetGroundInfo(600.f, 500, 200);
 	SAFE_RELEASE(pGround);
 
 	// ÇÃ·§Æû
@@ -46,6 +51,11 @@ bool TestScene::Init()
 	TilePlatform* pTilePlatform = Obj::CreateObj<TilePlatform>("Platform2", pLayer);
 	pTilePlatform->Init(POSITION(900.f, 500.f), 4, 6);
 	SAFE_RELEASE(pTilePlatform);
+
+	// °¡½Ã (Å¸ÀÏ ÇÃ·§Æû ÇüÅÂ)
+	Needle* pNeedle = Obj::CreateObj<Needle>("Needle1", pLayer);
+	pNeedle->Init(POSITION(0.f, 1000.f), 100, 1);
+	SAFE_RELEASE(pNeedle);
 
 	// ¹è°æ
 	pLayer = FindLayer("Background");

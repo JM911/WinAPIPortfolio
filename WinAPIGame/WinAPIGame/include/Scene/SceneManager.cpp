@@ -18,7 +18,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Init()
 {
-	// TODO: StartScene 클래스 타입으로 CreateScene 템플릿 함수 호출
+	// 게임 시작할 때 호출하고 싶은 화면 작성
 	CreateScene<StartScene>();
 
 	return true;

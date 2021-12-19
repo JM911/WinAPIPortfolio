@@ -35,6 +35,9 @@ int ColliderPoint::Update(float fDeltaTime)
 int ColliderPoint::LateUpdate(float fDeltaTime)
 {
 	Collider::LateUpdate(fDeltaTime);
+
+	m_tPointPos = m_pObj->GetPos();
+
 	return 0;
 }
 

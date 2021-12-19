@@ -69,6 +69,8 @@ private:
     void DashDownRight(float fDeltaTime);
     void DashDownLeft(float fDeltaTime);
 
+    void Die();
+
     // 충돌함수
 private:
     void StandOnGround(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
@@ -77,6 +79,6 @@ private:
     void CollisionWithPlatform(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
     void OffWall(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
     
-    void CollisionWithWall(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
+    void CollisionWithNeedle(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 };
 

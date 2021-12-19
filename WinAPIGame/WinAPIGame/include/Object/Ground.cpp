@@ -17,29 +17,24 @@ Ground::~Ground()
 {
 }
 
-bool Ground::Init()
+void Ground::SetGroundInfo(float fStartX, int iWidth, int iHeight)
 {
-	// 월드 좌우로 100 튀어나오고 월드 아래로 100 튀어나오게 만듦
-	SetPos(-100.f, (float)GETWORLDRES.iH - m_iHeight);
-	SetSize(GETWORLDRES.iW + 200.f, m_iHeight + 100.f);
-	SetPivot(0.0f, 0.0f);
+	m_fStartX = fStartX;
+	m_iWidth = iWidth;
+	m_iHeight = iHeight;
+	
+	SetPos(m_fStartX, (float)GETWORLDRES.iH - m_iHeight);
+	SetSize((float)m_iWidth, m_iHeight + 100.f);
 
 	// 똑같은 크기의 RECT 충돌체 설정
-	EraseCollider("GroundBody");
-
 	ColliderRect* pRC = AddCollider<ColliderRect>("GroundBody");
 	pRC->SetRect(0, 0, (int)m_tSize.x, (int)m_tSize.y);
 
 	SAFE_RELEASE(pRC);
-
-	return true;
 }
 
-bool Ground::Init(int tHeight)
+bool Ground::Init()
 {
-	m_iHeight = tHeight;
-	Init();
-
 	return true;
 }
 

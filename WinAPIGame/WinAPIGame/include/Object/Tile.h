@@ -8,7 +8,7 @@ private:
     friend class Obj;
     friend class TilePlatform;
 
-private:
+protected:
     Tile();
     Tile(const Tile& tile);
     ~Tile();

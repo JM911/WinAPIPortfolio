@@ -1,19 +1,17 @@
 #pragma once
-#include "StaticObj.h"
+#include "TilePlatform.h"
 
-class TilePlatform :
-    public StaticObj
+class Needle :
+    public TilePlatform
 {
 private:
     friend class Obj;
+    friend class Scene;
 
 protected:
-    TilePlatform();
-    TilePlatform(const TilePlatform& tilePlatform);
-    virtual ~TilePlatform();
-
-private:
-    vector<class Tile*> m_vecTile;
+    Needle();
+    Needle(const Needle& needle);
+    ~Needle();
 
 public:
     virtual bool Init();
@@ -24,6 +22,6 @@ public:
     virtual void Collision(float fDeltaTime);
     virtual void Render(HDC hDC, float fDeltaTime);
 
-    virtual TilePlatform* Clone();
+    virtual Needle* Clone();
 };
 

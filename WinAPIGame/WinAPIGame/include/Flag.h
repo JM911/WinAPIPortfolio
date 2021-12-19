@@ -67,3 +67,11 @@ enum class PLAYER_ANI_STATUS
 	CLIMB_LEFT,
 	CLIMB_RIGHT
 };
+
+// UI 버튼 상태
+enum class BTN_STATE
+{
+	NONE,
+	MOUSE_OVER,
+	CLICK
+};

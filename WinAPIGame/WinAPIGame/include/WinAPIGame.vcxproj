@@ -161,6 +161,7 @@
     <ClCompile Include="Object\Ground.cpp" />
     <ClCompile Include="Object\MouseObj.cpp" />
     <ClCompile Include="Object\MoveObj.cpp" />
+    <ClCompile Include="Object\Needle.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\StaticObj.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Ref.cpp" />
     <ClCompile Include="Resources\ResourcesManager.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />
+    <ClCompile Include="Scene\GameOverScene.cpp" />
     <ClCompile Include="Scene\Layer.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
@@ -198,6 +200,7 @@
     <ClInclude Include="Object\Ground.h" />
     <ClInclude Include="Object\MouseObj.h" />
     <ClInclude Include="Object\MoveObj.h" />
+    <ClInclude Include="Object\Needle.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\Player.h" />
     <ClInclude Include="Object\StaticObj.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\ResourcesManager.h" />
     <ClInclude Include="Resources\Texture.h" />
+    <ClInclude Include="Scene\GameOverScene.h" />
     <ClInclude Include="Scene\Layer.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
