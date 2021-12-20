@@ -35,5 +35,6 @@ public:
     virtual Dashball* Clone();
 
     // TODO: 충돌함수 추가 - 플레이어와 충돌하면 사라지고(텍스쳐를 빈 화면으로 출력) Enable = false 설정
+    void CollisionWithPlayer(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 };
 

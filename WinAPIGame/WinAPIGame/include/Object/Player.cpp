@@ -7,6 +7,7 @@
 #include "../Scene/SceneManager.h"
 #include "../Scene/GameOverScene.h"
 #include "../Scene/TestScene.h"
+#include "Dashball.h"
 
 Player::Player() :	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -133,6 +134,8 @@ bool Player::Init()
 	pRC->AddCollisionFunction(COL_STATE::LEAVE, this, &Player::OffWall);
 
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithNeedle);
+
+	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithDashball);
 
 	SAFE_RELEASE(pRC);
 
@@ -714,5 +717,14 @@ void Player::CollisionWithNeedle(Collider* pSrc, Collider* pDest, float fDeltaTi
 	if (pDest->GetTag() == "NeedleBody")
 	{
 		Die();
+	}
+}
+
+void Player::CollisionWithDashball(Collider* pSrc, Collider* pDest, float fDeltaTime)
+{
+	if (pDest->GetTag() == "DashballBody")
+	{
+		if(((Dashball*)pDest->GetObj())->GetEnable())
+			m_bDashEnable = true;
 	}
 }

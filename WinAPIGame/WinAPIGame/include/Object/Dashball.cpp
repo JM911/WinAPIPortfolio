@@ -27,6 +27,9 @@ bool Dashball::Init()
 
 	ColliderCircle* pCC = AddCollider<ColliderCircle>("DashballBody");
 	pCC->SetCircle(POSITION(0.f, 0.f), GetSize().x / 2);
+
+	pCC->AddCollisionFunction(COL_STATE::ENTER, this, &Dashball::CollisionWithPlayer);
+
 	SAFE_RELEASE(pCC);
 
 	return true;
@@ -45,12 +48,14 @@ int Dashball::Update(float fDeltaTime)
 	{
 		if (m_fTime < m_fReviveTime)
 		{
-			// TODO: SetTexture 빈그림
+			SetTexture("UnableBallTex", L"Interactive/Unable.bmp");
+			SetColorKey(255, 255, 255);
 			m_fTime += fDeltaTime;
 		}
 		else
 		{
-			// TODO: SetTexture 원래그림
+			SetTexture("DashballTex", L"Interactive/Dashball.bmp");
+			SetColorKey(255, 255, 255);
 			m_fTime = 0.f;
 			m_bEnable = true;
 		}
@@ -78,4 +83,12 @@ void Dashball::Render(HDC hDC, float fDeltaTime)
 Dashball* Dashball::Clone()
 {
 	return new Dashball(*this);
+}
+
+void Dashball::CollisionWithPlayer(Collider* pSrc, Collider* pDest, float fDeltaTime)
+{
+	if (pDest->GetTag() == "PlayerBody")
+	{
+		m_bEnable = false;
+	}
 }

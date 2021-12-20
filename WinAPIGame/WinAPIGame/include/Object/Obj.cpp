@@ -244,6 +244,9 @@ void Obj::Collision(float fDeltaTime)
 
 void Obj::Render(HDC hDC, float fDeltaTime)
 {
+	if (m_pLayer && m_pLayer->GetTag() == "UI")
+		return;
+
 	POSITION tPos;
 	tPos.x = m_tPos.x - m_tSize.x * m_tPivot.x - GET_SINGLE(Camera)->GetPos().x;
 	tPos.y = m_tPos.y - m_tSize.y * m_tPivot.y - GET_SINGLE(Camera)->GetPos().y;

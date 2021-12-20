@@ -1,6 +1,8 @@
 #include "ColliderRect.h"
 #include "../Object/Obj.h"
 #include "../Core/Camera.h"
+#include "ColliderCircle.h"
+#include "ColliderPoint.h"
 
 ColliderRect::ColliderRect()
 {
@@ -60,7 +62,10 @@ bool ColliderRect::Collision(Collider* pDest)
 	{
 	case COL_TYPE::RECT:
 		return CollisionRectToRect(m_tWorldInfo, ((ColliderRect*)pDest)->GetWorldInfo(), &m_tIntersectInfo);
-		break;
+	case COL_TYPE::CIRCLE:
+		return CollisionRectToCircle(m_tWorldInfo, ((ColliderCircle*)pDest)->GetWorldInfo());
+	case COL_TYPE::POINT:
+		return CollisionRectToPoint(m_tWorldInfo, ((ColliderPoint*)pDest)->GetPointPos());
 	}
 
 	return false;

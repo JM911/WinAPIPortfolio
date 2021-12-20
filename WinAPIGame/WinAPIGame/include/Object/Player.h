@@ -5,7 +5,7 @@ class Player :
     public Creature
 {
 private:
-    friend class Obj;   // 왜 있는지는 모르겠는데 일단 가져옴
+    friend class Obj;
     friend class Scene;
 
 public:     // TODO: 테스트 끝나면 protected로 수정
@@ -80,5 +80,7 @@ private:
     void OffWall(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
     
     void CollisionWithNeedle(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
+
+    void CollisionWithDashball(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 };
 

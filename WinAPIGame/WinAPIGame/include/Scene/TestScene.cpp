@@ -8,6 +8,7 @@
 #include "../Object/TilePlatform.h"
 #include "../Object/Needle.h"
 #include "../Object/Dashball.h"
+#include "../Object/ScoreUI.h"
 
 TestScene::TestScene()
 {
@@ -71,6 +72,11 @@ bool TestScene::Init()
 	TestBackground* pBackground = Obj::CreateObj<TestBackground>("TestBG", pLayer);
 	pBackground->Init(POSITION(0.f, 0.f), _SIZE(3840, 720), POSITION(0.f, 0.f), "TestBG", L"Stage1_2.bmp");
 	SAFE_RELEASE(pBackground);
+
+	// 점수 (테스트중)
+	pLayer = FindLayer("UI");
+	ScoreUI* pScore = Obj::CreateObj<ScoreUI>("TestScore", pLayer);
+	SAFE_RELEASE(pScore);
 
 	return true;
 }

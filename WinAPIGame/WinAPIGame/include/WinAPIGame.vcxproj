@@ -165,8 +165,10 @@
     <ClCompile Include="Object\MouseObj.cpp" />
     <ClCompile Include="Object\MoveObj.cpp" />
     <ClCompile Include="Object\Needle.cpp" />
+    <ClCompile Include="Object\NumberUI.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
+    <ClCompile Include="Object\ScoreUI.cpp" />
     <ClCompile Include="Object\StaticObj.cpp" />
     <ClCompile Include="Object\Strawberry.cpp" />
     <ClCompile Include="Object\TestBackground.cpp" />
@@ -208,8 +210,10 @@
     <ClInclude Include="Object\MouseObj.h" />
     <ClInclude Include="Object\MoveObj.h" />
     <ClInclude Include="Object\Needle.h" />
+    <ClInclude Include="Object\NumberUI.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\Player.h" />
+    <ClInclude Include="Object\ScoreUI.h" />
     <ClInclude Include="Object\StaticObj.h" />
     <ClInclude Include="Object\Strawberry.h" />
     <ClInclude Include="Object\TestBackground.h" />

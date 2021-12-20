@@ -1,6 +1,7 @@
 #include "ColliderPoint.h"
 #include "../Object/Obj.h"
 #include "ColliderRect.h"
+#include "ColliderCircle.h"
 
 ColliderPoint::ColliderPoint()
 {
@@ -47,6 +48,8 @@ bool ColliderPoint::Collision(Collider* pDest)
 	{
 	case COL_TYPE::RECT:
 		return CollisionRectToPoint(((ColliderRect*)pDest)->GetWorldInfo(), m_tPointPos);
+	case COL_TYPE::CIRCLE:
+		return CollisionCircleToPoint(((ColliderCircle*)pDest)->GetWorldInfo(), m_tPointPos);
 	}
 
 	return false;

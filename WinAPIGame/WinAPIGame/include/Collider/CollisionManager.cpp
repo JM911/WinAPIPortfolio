@@ -35,10 +35,15 @@ void CollisionManager::Collision(float fDeltaTime)
     {
         list<Obj*>::iterator iter_2 = iter_1;
         ++iter_2;
+
+        //list<Obj*>::iterator iter_2 = m_CollisionList.begin();
         list<Obj*>::iterator iterEnd_2 = m_CollisionList.end();
 
         for (; iter_2 != iterEnd_2; ++iter_2)
         {
+            //if (iter_2 == iter_1)
+            //    continue;
+            
             Collision(*iter_1, *iter_2, fDeltaTime);
         }
     }
