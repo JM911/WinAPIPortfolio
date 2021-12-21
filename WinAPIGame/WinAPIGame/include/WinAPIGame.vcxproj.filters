@@ -112,6 +112,9 @@
     <Filter Include="03. Object\02. StaticObj\06. StageClear">
       <UniqueIdentifier>{d9e9926c-3d21-4be0-943c-ebf617fdcb8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07. Sound">
+      <UniqueIdentifier>{b9718fcb-c942-4db9-b879-30690cf81dbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -248,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="Object\LifeIcon.cpp">
       <Filter>03. Object\03. UIObj\04. InGameUI\02. PlayerLife</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundManager.cpp">
+      <Filter>07. Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="Object\LifeIcon.h">
       <Filter>03. Object\03. UIObj\04. InGameUI\02. PlayerLife</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundManager.h">
+      <Filter>07. Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

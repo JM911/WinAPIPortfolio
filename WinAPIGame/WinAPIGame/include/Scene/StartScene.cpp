@@ -6,6 +6,7 @@
 #include "../Object/UIPanel.h"
 #include "../Object/UIButton.h"
 #include "../Collider/ColliderRect.h"
+#include "../Sound/SoundManager.h"
 
 StartScene::StartScene()
 {
@@ -50,6 +51,10 @@ bool StartScene::Init()
 	pPlayBtn->SetCallback(this, &StartScene::StartButtonCallback);
 
 	SAFE_RELEASE(pPlayBtn);
+
+	// BGM
+	GET_SINGLE(SoundManager)->LoadSound("IntroBGM", true, "Intro.ogg");
+	GET_SINGLE(SoundManager)->Play("IntroBGM");
 
 	return true;
 }

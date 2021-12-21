@@ -8,12 +8,15 @@
 #include <unordered_map>
 #include <typeinfo>			// 타입.name() 함수 사용
 #include <functional>
+#include "Sound/fmod.h"
+#include "Sound/fmod.hpp"
 
 using namespace std;
 
 #include "Macro.h"
 #include "resource.h"
 #include "Types.h"
+#include "Flag.h"
 
 #pragma comment(lib, "msimg32")		// 정적 라이브러리를 포함시켜주는 코드
 
@@ -21,6 +24,7 @@ using namespace std;
 #define ROOT_PATH		"RootPath"
 #define TEXTURE_PATH	"TexturePath"
 #define BACKGROUND_PATH	"BackgroundPath"
+#define SOUND_PATH		"SoundPath"
 
 template <typename T>
 void Safe_Delete_VecList(T& p)

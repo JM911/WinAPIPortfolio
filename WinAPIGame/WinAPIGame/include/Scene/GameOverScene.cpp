@@ -1,6 +1,7 @@
 #include "GameOverScene.h"
 #include "../Object/UIPanel.h"
 #include "../Core/Camera.h"
+#include "../Sound/SoundManager.h"
 
 GameOverScene::GameOverScene()
 {
@@ -24,6 +25,11 @@ bool GameOverScene::Init()
 	pBackPanel->SetTexture("GameOverBG", L"Backgrounds/GameOverBG.bmp");
 
 	GET_SINGLE(Camera)->SetTarget(pBackPanel);
+
+	// »ç¿îµå
+	GET_SINGLE(SoundManager)->Stop(SOUND_TYPE::BGM);
+	GET_SINGLE(SoundManager)->LoadSound("GameOverSound", false, "GameOver.mp3");
+	GET_SINGLE(SoundManager)->Play("GameOverSound");
 
 	SAFE_RELEASE(pBackPanel);
 		

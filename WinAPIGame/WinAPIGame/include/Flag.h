@@ -75,3 +75,11 @@ enum class BTN_STATE
 	MOUSE_OVER,
 	CLICK
 };
+
+// 사운드 타입
+enum class SOUND_TYPE
+{
+	BGM,
+	EFFECT,
+	END
+};

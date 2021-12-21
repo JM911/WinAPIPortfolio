@@ -7,6 +7,7 @@
 #include "Resources/Texture.h"
 #include "Core/Camera.h"
 #include "Collider/CollisionManager.h"
+#include "Sound/SoundManager.h"
 
 DEFINITION_SINGLE(Core)
 bool Core::m_bLoop = true;
@@ -56,6 +57,7 @@ Core::~Core()
 	DESTROY_SINGLE(ResourcesManager);
 	DESTROY_SINGLE(Camera);
 	DESTROY_SINGLE(CollisionManager);
+	DESTROY_SINGLE(SoundManager);
 
 	ReleaseDC(m_hWnd, m_hDC);
 }
@@ -137,6 +139,10 @@ bool Core::Init(HINSTANCE hInst)
 
 	// 카메라 초기화
 	if (!GET_SINGLE(Camera)->Init(POSITION(0.f, 0.f), m_tRS, m_tWorldRS))
+		return false;
+
+	// 사운드 관리자 초기화
+	if (!GET_SINGLE(SoundManager)->Init())
 		return false;
 
 	// 씬매니저 초기화

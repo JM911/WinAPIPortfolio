@@ -35,6 +35,10 @@ bool PathManager::Init()
     if (!CreatePath(BACKGROUND_PATH, L"Texture/Backgrounds/"))
         return false;
 
+    // 사운드 경로 설정
+    if (!CreatePath(SOUND_PATH, L"Sound/"))
+        return false;
+
     return true;
 }
 
