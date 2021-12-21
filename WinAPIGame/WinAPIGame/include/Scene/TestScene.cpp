@@ -9,6 +9,9 @@
 #include "../Object/Needle.h"
 #include "../Object/Dashball.h"
 #include "../Object/ScoreUI.h"
+#include "../Object/StageClearObj.h"
+#include "../Object/Strawberry.h"
+#include "../Object/PlayerLifeUI.h"
 
 TestScene::TestScene()
 {
@@ -35,7 +38,7 @@ bool TestScene::Init()
 
 	// 땅
 	Ground* pGround = Obj::CreateObj<Ground>("Ground1", pLayer);
-	pGround->SetGroundInfo(-100.f, 3000.f, 90);
+	pGround->SetGroundInfo(-100.f, 700.f, 90);
 	SAFE_RELEASE(pGround);
 
 	//pGround = Obj::CreateObj<Ground>("Ground2", pLayer);
@@ -67,6 +70,15 @@ bool TestScene::Init()
 	pDashball->SetPos(100.f, 500.f);
 	SAFE_RELEASE(pDashball);
 
+	// 스테이지 클리어
+	StageClearObj* pStageClear = Obj::CreateObj<StageClearObj>("StageClear", pLayer);
+	SAFE_RELEASE(pStageClear);
+
+	// 딸기
+	Strawberry* pStrawberry = Obj::CreateObj<Strawberry>("Strawberry1", pLayer);
+	pStrawberry->SetPos(500.f, 500.f);
+	SAFE_RELEASE(pStrawberry);
+
 	// 배경
 	pLayer = FindLayer("Background");
 	TestBackground* pBackground = Obj::CreateObj<TestBackground>("TestBG", pLayer);
@@ -77,6 +89,10 @@ bool TestScene::Init()
 	pLayer = FindLayer("UI");
 	ScoreUI* pScore = Obj::CreateObj<ScoreUI>("TestScore", pLayer);
 	SAFE_RELEASE(pScore);
+
+	// 목숨 (테스트중)
+	PlayerLifeUI* pLifeUI = Obj::CreateObj<PlayerLifeUI>("TestLife", pLayer);
+	SAFE_RELEASE(pLifeUI);
 
 	return true;
 }

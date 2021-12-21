@@ -16,6 +16,14 @@ public:     // TODO: 테스트 끝나면 protected로 수정
     // TODO: 방향 등 필요한 요소 추가
 private:
     int m_iDir;
+    static int m_iLife;
+
+    // Get 함수
+public:
+    static int GetLife()
+    {
+        return m_iLife;
+    }
 
 public:
     virtual bool Init();
@@ -82,5 +90,9 @@ private:
     void CollisionWithNeedle(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 
     void CollisionWithDashball(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
+
+    void CollisionWithStageClear(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
+
+    void CollisionWithStrawberry(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
 };
 

@@ -21,7 +21,7 @@ bool GameOverScene::Init()
 	UIPanel* pBackPanel = Obj::CreateObj<UIPanel>("BackPanel", pLayer);
 
 	pBackPanel->SetSize(1280, 720);
-	pBackPanel->SetTexture("StartBG", L"Backgrounds/startBG.bmp");
+	pBackPanel->SetTexture("GameOverBG", L"Backgrounds/GameOverBG.bmp");
 
 	GET_SINGLE(Camera)->SetTarget(pBackPanel);
 

@@ -7,7 +7,12 @@
 #include "../Scene/SceneManager.h"
 #include "../Scene/GameOverScene.h"
 #include "../Scene/TestScene.h"
+#include "../Scene/TestSceneTwo.h"
 #include "Dashball.h"
+#include "ScoreUI.h"
+#include "Strawberry.h"
+
+int Player::m_iLife = 5;
 
 Player::Player() :	// TODO: 변수들 모두 초기화했는지 확인!
 	m_iDir(1),
@@ -136,6 +141,10 @@ bool Player::Init()
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithNeedle);
 
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithDashball);
+
+	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithStageClear);
+
+	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithStrawberry);
 
 	SAFE_RELEASE(pRC);
 
@@ -538,8 +547,14 @@ void Player::DashDownLeft(float fDeltaTime)
 
 void Player::Die()
 {
-	if (m_pScene->GetSceneTag() == "Stage1")
+	ScoreUI::ReturnToPrevScore();
+
+	// TODO: 목숨 시스템 만들고 수정
+	if (m_pScene->GetSceneTag() == "Stage1" && Player::m_iLife > 0)
+	{
 		GET_SINGLE(SceneManager)->CreateScene<TestScene>(SCENE_TYPE::NEXT);
+		Player::m_iLife--;
+	}
 	else
 		GET_SINGLE(SceneManager)->CreateScene<GameOverScene>(SCENE_TYPE::NEXT);
 }
@@ -726,5 +741,24 @@ void Player::CollisionWithDashball(Collider* pSrc, Collider* pDest, float fDelta
 	{
 		if(((Dashball*)pDest->GetObj())->GetEnable())
 			m_bDashEnable = true;
+	}
+}
+
+void Player::CollisionWithStageClear(Collider* pSrc, Collider* pDest, float fDeltaTime)
+{
+	if (pDest->GetTag() == "StageClearBody")
+	{
+		ScoreUI::SetPrevScore();
+
+		GET_SINGLE(SceneManager)->CreateScene<TestSceneTwo>(SCENE_TYPE::NEXT);
+	}
+}
+
+void Player::CollisionWithStrawberry(Collider* pSrc, Collider* pDest, float fDeltaTime)
+{
+	if (pDest->GetTag() == "StrawberryBody")
+	{
+		if(((Strawberry*)pDest->GetObj())->GetEnable())
+			ScoreUI::AddScore(1);
 	}
 }

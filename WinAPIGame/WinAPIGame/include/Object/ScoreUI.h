@@ -15,6 +15,7 @@ protected:
 
 private:
     static int m_iScore;
+    static int m_iPrevScore;
     class NumberUI* m_pNum1;
     class NumberUI* m_pNum2;
 
@@ -31,12 +32,20 @@ public:
     {
         m_iScore = iScore;
     }
+    static void SetPrevScore()
+    {
+        m_iPrevScore = m_iScore;
+    }
     
     // 기타 함수
 public:
     static void AddScore(int iScore)
     {
         m_iScore += iScore;
+    }
+    static void ReturnToPrevScore()
+    {
+        m_iScore = m_iPrevScore;
     }
 
 public:

@@ -162,13 +162,16 @@
     <ClCompile Include="Object\Creature.cpp" />
     <ClCompile Include="Object\Dashball.cpp" />
     <ClCompile Include="Object\Ground.cpp" />
+    <ClCompile Include="Object\LifeIcon.cpp" />
     <ClCompile Include="Object\MouseObj.cpp" />
     <ClCompile Include="Object\MoveObj.cpp" />
     <ClCompile Include="Object\Needle.cpp" />
     <ClCompile Include="Object\NumberUI.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\Player.cpp" />
+    <ClCompile Include="Object\PlayerLifeUI.cpp" />
     <ClCompile Include="Object\ScoreUI.cpp" />
+    <ClCompile Include="Object\StageClearObj.cpp" />
     <ClCompile Include="Object\StaticObj.cpp" />
     <ClCompile Include="Object\Strawberry.cpp" />
     <ClCompile Include="Object\TestBackground.cpp" />
@@ -187,6 +190,7 @@
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\StartScene.cpp" />
     <ClCompile Include="Scene\TestScene.cpp" />
+    <ClCompile Include="Scene\TestSceneTwo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animation.h" />
@@ -207,13 +211,16 @@
     <ClInclude Include="Object\Creature.h" />
     <ClInclude Include="Object\Dashball.h" />
     <ClInclude Include="Object\Ground.h" />
+    <ClInclude Include="Object\LifeIcon.h" />
     <ClInclude Include="Object\MouseObj.h" />
     <ClInclude Include="Object\MoveObj.h" />
     <ClInclude Include="Object\Needle.h" />
     <ClInclude Include="Object\NumberUI.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\Player.h" />
+    <ClInclude Include="Object\PlayerLifeUI.h" />
     <ClInclude Include="Object\ScoreUI.h" />
+    <ClInclude Include="Object\StageClearObj.h" />
     <ClInclude Include="Object\StaticObj.h" />
     <ClInclude Include="Object\Strawberry.h" />
     <ClInclude Include="Object\TestBackground.h" />
@@ -233,6 +240,7 @@
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\StartScene.h" />
     <ClInclude Include="Scene\TestScene.h" />
+    <ClInclude Include="Scene\TestSceneTwo.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>

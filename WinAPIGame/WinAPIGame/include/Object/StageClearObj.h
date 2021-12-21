@@ -1,7 +1,7 @@
 #pragma once
 #include "StaticObj.h"
 
-class Strawberry :
+class StageClearObj :
     public StaticObj
 {
 private:
@@ -9,19 +9,9 @@ private:
     friend class Scene;
 
 protected:
-    Strawberry();
-    Strawberry(const Strawberry& berry);
-    ~Strawberry();
-
-private:
-    bool m_bEnable;
-
-    // Get 함수
-public:
-    bool GetEnable()    const
-    {
-        return m_bEnable;
-    }
+    StageClearObj();
+    StageClearObj(const StageClearObj& clear);
+    ~StageClearObj();
 
 public:
     virtual bool Init();
@@ -31,10 +21,6 @@ public:
     virtual void Collision(float fDeltaTime);
     virtual void Render(HDC hDC, float fDeltaTime);
 
-    virtual Strawberry* Clone();
-
-    // 충돌 함수
-private:
-    void CollisionWithPlayer(class Collider* pSrc, class Collider* pDest, float fDeltaTime);
+    virtual StageClearObj* Clone();
 };
 

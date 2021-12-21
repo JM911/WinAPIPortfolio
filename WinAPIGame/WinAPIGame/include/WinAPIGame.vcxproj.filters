@@ -106,6 +106,12 @@
     <Filter Include="03. Object\03. UIObj\04. InGameUI\01. Score">
       <UniqueIdentifier>{2f3fabd0-15f3-4bc4-b201-a175072cf12f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\03. UIObj\04. InGameUI\02. PlayerLife">
+      <UniqueIdentifier>{d50e8974-6322-4c38-b2b6-3a8e221d45fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\02. StaticObj\06. StageClear">
+      <UniqueIdentifier>{d9e9926c-3d21-4be0-943c-ebf617fdcb8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -230,6 +236,18 @@
     </ClCompile>
     <ClCompile Include="Object\NumberUI.cpp">
       <Filter>03. Object\03. UIObj\04. InGameUI\01. Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TestSceneTwo.cpp">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\StageClearObj.cpp">
+      <Filter>03. Object\02. StaticObj\06. StageClear</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\PlayerLifeUI.cpp">
+      <Filter>03. Object\03. UIObj\04. InGameUI\02. PlayerLife</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\LifeIcon.cpp">
+      <Filter>03. Object\03. UIObj\04. InGameUI\02. PlayerLife</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +385,18 @@
     </ClInclude>
     <ClInclude Include="Object\NumberUI.h">
       <Filter>03. Object\03. UIObj\04. InGameUI\01. Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TestSceneTwo.h">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\StageClearObj.h">
+      <Filter>03. Object\02. StaticObj\06. StageClear</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\PlayerLifeUI.h">
+      <Filter>03. Object\03. UIObj\04. InGameUI\02. PlayerLife</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\LifeIcon.h">
+      <Filter>03. Object\03. UIObj\04. InGameUI\02. PlayerLife</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

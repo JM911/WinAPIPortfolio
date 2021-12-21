@@ -2,6 +2,7 @@
 #include "NumberUI.h"
 
 int ScoreUI::m_iScore = 0;
+int ScoreUI::m_iPrevScore = 0;
 
 ScoreUI::ScoreUI()
 {
@@ -23,6 +24,7 @@ bool ScoreUI::Init()
 	SetPos(200, 100);
 	SetSize(113, 30);
 	SetTexture("ScoreTex", L"UI/score.bmp");
+	SetColorKey(255, 255, 255);
 
 	m_pNum1 = new NumberUI;
 	m_pNum2 = new NumberUI;
