@@ -61,13 +61,14 @@ void NumberUI::SetTextureByNum()
 		SetColorKey(255, 255, 255);
 		break;
 	}
+	SetColorKey(255, 0, 255);
 }
 
 bool NumberUI::Init()
 {
 	SetSize(24, 30);
 	SetTexture("Num0", L"UI/Number/0.bmp");
-	SetColorKey(255, 255, 255);
+	//SetColorKey(255, 255, 255);
 	return true;
 }
 

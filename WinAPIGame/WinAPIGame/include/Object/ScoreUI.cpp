@@ -21,18 +21,18 @@ ScoreUI::~ScoreUI()
 
 bool ScoreUI::Init()
 {
-	SetPos(200, 100);
+	SetPos(1000, 50);
 	SetSize(113, 30);
 	SetTexture("ScoreTex", L"UI/score.bmp");
-	SetColorKey(255, 255, 255);
+	//SetColorKey(255, 255, 255);
 
 	m_pNum1 = new NumberUI;
 	m_pNum2 = new NumberUI;
 	m_pNum1->Init();
 	m_pNum2->Init();
 
-	m_pNum1->SetPos(350, 100);
-	m_pNum2->SetPos(390, 100);
+	m_pNum1->SetPos(GetPos().x + 130, GetPos().y);
+	m_pNum2->SetPos(GetPos().x + 160, GetPos().y);
 
 	return true;
 }

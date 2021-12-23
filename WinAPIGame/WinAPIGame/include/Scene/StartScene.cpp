@@ -7,6 +7,7 @@
 #include "../Object/UIButton.h"
 #include "../Collider/ColliderRect.h"
 #include "../Sound/SoundManager.h"
+#include "Stage1.h"
 
 StartScene::StartScene()
 {
@@ -61,7 +62,7 @@ bool StartScene::Init()
 
 void StartScene::StartButtonCallback(float fDeltaTime)
 {
-	GET_SINGLE(SceneManager)->CreateScene<TestScene>(SCENE_TYPE::NEXT);
+	GET_SINGLE(SceneManager)->CreateScene<Stage1>(SCENE_TYPE::NEXT);
 }
 
 void StartScene::EndButtonCallback(float fDeltaTime)

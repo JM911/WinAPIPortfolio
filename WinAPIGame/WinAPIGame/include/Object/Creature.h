@@ -11,6 +11,8 @@ protected:
     ~Creature();
 
 // TODO: HP, Die 등 생명체 오브젝트 공통요소 또는 함수 추가
+private:
+    bool    m_bStarted;
 
 public:
     virtual bool Init() = 0;

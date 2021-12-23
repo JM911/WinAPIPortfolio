@@ -12,6 +12,7 @@
 #include "../Object/StageClearObj.h"
 #include "../Object/Strawberry.h"
 #include "../Object/PlayerLifeUI.h"
+#include "../Sound/SoundManager.h"
 
 TestScene::TestScene()
 {
@@ -26,7 +27,7 @@ bool TestScene::Init()
 	if (!Scene::Init())		// 부모 Scene 클래스의 초기화 함수 호출
 		return false;
 
-	SetSceneTag("Stage1");
+	//SetSceneTag("Stage1");
 
 	// TODO: 앞으로 씬을 만들면 여기다가 레이어, 오브젝트 객체 모두 불러와서 사용
 

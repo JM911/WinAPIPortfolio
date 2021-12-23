@@ -98,3 +98,20 @@ PSOUNDINFO SoundManager::FindSound(const string& strKey)
 
 	return iter->second;
 }
+
+void SoundManager::ClearMap()
+{
+	unordered_map<string, PSOUNDINFO>::iterator iter;
+	unordered_map<string, PSOUNDINFO>::iterator iterEnd = m_mapSound.end();
+
+	for (iter = m_mapSound.begin(); iter != iterEnd; ++iter)
+	{
+		iter->second->pSound->release();
+		SAFE_DELETE(iter->second);
+	}
+
+	m_pSystem->close();
+	m_pSystem->release();
+
+	m_mapSound.clear();
+}

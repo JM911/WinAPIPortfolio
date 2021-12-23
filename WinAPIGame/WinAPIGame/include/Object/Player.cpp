@@ -11,6 +11,8 @@
 #include "Dashball.h"
 #include "ScoreUI.h"
 #include "Strawberry.h"
+#include "../Scene/Stage1.h"
+#include "../Scene/Stage2.h"
 
 int Player::m_iLife = 5;
 
@@ -57,7 +59,7 @@ Player::~Player()
 
 bool Player::Init()
 {
-	SetPos(200.f, 100.f);
+	SetPos(200.f, 500.f);
 	SetSize(64.f, 64.f);
 	SetSpeed(0.f, 0.f);
 	SetPivot(0.5f, 0.5f);
@@ -202,7 +204,8 @@ void Player::Input(float fDeltaTime)
 	// 기본 움직임
 	if (KEYPRESS("MoveLeft"))		// 왼쪽 방향키
 	{
-		m_tPos.x -= 200 * fDeltaTime;
+		if(!m_bRightWallJumping && !m_bLeftWallJumping)
+			m_tPos.x -= 200 * fDeltaTime;
 		m_iDir = -1;
 		m_bWalking = true;
 		if (!m_bJumping && m_bOnGround)
@@ -216,7 +219,8 @@ void Player::Input(float fDeltaTime)
 
 	if (KEYPRESS("MoveRight"))		// 오른쪽 방향키
 	{
-		m_tPos.x += 200 * fDeltaTime;
+		if (!m_bRightWallJumping && !m_bLeftWallJumping)
+			m_tPos.x += 200 * fDeltaTime;
 		m_iDir = 1;
 		m_bWalking = true;
 		if (!m_bJumping && m_bOnGround)
@@ -550,9 +554,13 @@ void Player::Die()
 	ScoreUI::ReturnToPrevScore();
 
 	// TODO: 목숨 시스템 만들고 수정
-	if (m_pScene->GetSceneTag() == "Stage1" && Player::m_iLife > 0)
+	if (Player::m_iLife > 0)
 	{
-		GET_SINGLE(SceneManager)->CreateScene<TestScene>(SCENE_TYPE::NEXT);
+		if(m_pScene->GetSceneTag() == "Stage1")
+			GET_SINGLE(SceneManager)->CreateScene<Stage1>(SCENE_TYPE::NEXT);
+		else if(m_pScene->GetSceneTag() == "Stage2")
+			GET_SINGLE(SceneManager)->CreateScene<Stage2>(SCENE_TYPE::NEXT);
+		
 		Player::m_iLife--;
 	}
 	else
@@ -606,7 +614,7 @@ void Player::StandOnGround(Collider* pSrc, Collider* pDest, float fDeltaTime)
 			}
 		}
 
-		if (iInterW < iInterH)	// 좌우에서 충돌
+		else if (iInterW < iInterH)	// 좌우에서 충돌
 		{
 			m_tSpeed.x = 0.f;
 
@@ -750,7 +758,8 @@ void Player::CollisionWithStageClear(Collider* pSrc, Collider* pDest, float fDel
 	{
 		ScoreUI::SetPrevScore();
 
-		GET_SINGLE(SceneManager)->CreateScene<TestSceneTwo>(SCENE_TYPE::NEXT);
+		if(m_pScene->GetSceneTag() == "Stage1")
+			GET_SINGLE(SceneManager)->CreateScene<Stage2>(SCENE_TYPE::NEXT);
 	}
 }
 

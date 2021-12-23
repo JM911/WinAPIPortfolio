@@ -255,6 +255,12 @@
     <ClCompile Include="Sound\SoundManager.cpp">
       <Filter>07. Sound</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\Stage1.cpp">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Stage2.cpp">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -406,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="Sound\SoundManager.h">
       <Filter>07. Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Stage1.h">
+      <Filter>02. Scene\01. Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Stage2.h">
+      <Filter>02. Scene\01. Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

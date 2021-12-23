@@ -31,9 +31,10 @@ public:
 	void Stop(SOUND_TYPE eType);
 	void Volume(SOUND_TYPE eType, float fVolume);
 
-private:
 	PSOUNDINFO FindSound(const string& strKey);
 
+	void ClearMap();		// 게임 재시작 기능 만들 때 호출
+	
 	DECLARE_SINGLE(SoundManager);
 };
 

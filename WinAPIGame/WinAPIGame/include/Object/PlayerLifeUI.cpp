@@ -29,7 +29,7 @@ bool PlayerLifeUI::Init()
 	{
 		LifeIcon* pLifeIcon = new LifeIcon;
 		pLifeIcon->Init();
-		pLifeIcon->SetPos(130 + 40 * i, 50);
+		pLifeIcon->SetPos(GetPos().x + GetSize().x + 10 + 40 * i, GetPos().y);
 		m_vecLifeIcon.push_back(pLifeIcon);
 	}
 
