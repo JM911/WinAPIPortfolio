@@ -32,12 +32,6 @@ int MoveObj::Update(float fDeltaTime)
     m_tPos.x += m_tSpeed.x * fDeltaTime;
     m_tPos.y += m_tSpeed.y * fDeltaTime;
 
-    if (m_tPos.y > 1080)    // 임시 제한
-    {
-        m_tPos.y = 1080;
-        m_tSpeed.y = 0;
-    }
-
     // TODO: 종단속도 처리
     if (m_tSpeed.y > 600)
         m_tSpeed.y = 600;

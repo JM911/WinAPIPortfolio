@@ -4,6 +4,8 @@
 #include "StartScene.h"
 #include "../Collider/CollisionManager.h"
 
+#include "../Scene/Stage3.h"
+
 DEFINITION_SINGLE(SceneManager)
 
 SceneManager::SceneManager()	:
@@ -19,7 +21,7 @@ SceneManager::~SceneManager()
 bool SceneManager::Init()
 {
 	// 게임 시작할 때 호출하고 싶은 화면 작성
-	CreateScene<StartScene>();
+	CreateScene<Stage3>();
 
 	return true;
 }

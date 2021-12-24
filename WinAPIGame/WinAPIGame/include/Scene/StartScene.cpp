@@ -54,6 +54,7 @@ bool StartScene::Init()
 	SAFE_RELEASE(pPlayBtn);
 
 	// BGM
+	GET_SINGLE(SoundManager)->ClearMap();
 	GET_SINGLE(SoundManager)->LoadSound("IntroBGM", true, "Intro.ogg");
 	GET_SINGLE(SoundManager)->Play("IntroBGM");
 

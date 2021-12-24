@@ -13,6 +13,8 @@
 #include "Strawberry.h"
 #include "../Scene/Stage1.h"
 #include "../Scene/Stage2.h"
+#include "../Scene/Stage3.h"
+#include "../Scene/GameClearScene.h"
 
 int Player::m_iLife = 5;
 
@@ -59,7 +61,7 @@ Player::~Player()
 
 bool Player::Init()
 {
-	SetPos(200.f, 500.f);
+	SetPos(200.f, 600.f);
 	SetSize(64.f, 64.f);
 	SetSpeed(0.f, 0.f);
 	SetPivot(0.5f, 0.5f);
@@ -167,9 +169,9 @@ void Player::Input(float fDeltaTime)
 	}
 	if (m_bLeftWallJumping)
 	{
-		if (fWallJumpTime < 0.1f)
+		if (fWallJumpTime < 0.15f)
 		{
-			m_iDir = 1;
+			m_iDir = -1;
 			m_tPos.x -= 600.f * fDeltaTime;
 			fWallJumpTime += fDeltaTime;
 		}
@@ -188,9 +190,9 @@ void Player::Input(float fDeltaTime)
 	}
 	if (m_bRightWallJumping)
 	{
-		if (fWallJumpTime < 0.1f)
+		if (fWallJumpTime < 0.15f)
 		{
-			m_iDir = -1;
+			m_iDir = 1;
 			m_tPos.x += 600.f * fDeltaTime;
 			fWallJumpTime += fDeltaTime;
 		}
@@ -323,13 +325,13 @@ void Player::Input(float fDeltaTime)
 	if (m_bDashUp)
 		DashUp(fDeltaTime);
 
-	if (KEYDOWN("DashDown") && m_bDashEnable)
-	{
-		m_bDashDown = true;
-		m_bDashEnable = false;
-	}
-	if (m_bDashDown)
-		DashDown(fDeltaTime);
+	//if (KEYDOWN("DashDown") && m_bDashEnable)
+	//{
+	//	m_bDashDown = true;
+	//	m_bDashEnable = false;
+	//}
+	//if (m_bDashDown)
+	//	DashDown(fDeltaTime);
 
 	// 벽잡기
 	if (KEYPRESS("WallCliff"))
@@ -382,6 +384,8 @@ int Player::LateUpdate(float fDeltaTime)
 		m_tPos.x = 0;
 	if (m_tPos.x > GETWORLDRES.iW)
 		m_tPos.x = (float)GETWORLDRES.iW;
+	if (m_tPos.y < 0)
+		m_tPos.y = 0;
 
 	return 0;
 }
@@ -560,6 +564,8 @@ void Player::Die()
 			GET_SINGLE(SceneManager)->CreateScene<Stage1>(SCENE_TYPE::NEXT);
 		else if(m_pScene->GetSceneTag() == "Stage2")
 			GET_SINGLE(SceneManager)->CreateScene<Stage2>(SCENE_TYPE::NEXT);
+		else if(m_pScene->GetSceneTag() == "Stage3")
+			GET_SINGLE(SceneManager)->CreateScene<Stage3>(SCENE_TYPE::NEXT);
 		
 		Player::m_iLife--;
 	}
@@ -760,6 +766,14 @@ void Player::CollisionWithStageClear(Collider* pSrc, Collider* pDest, float fDel
 
 		if(m_pScene->GetSceneTag() == "Stage1")
 			GET_SINGLE(SceneManager)->CreateScene<Stage2>(SCENE_TYPE::NEXT);
+
+		if(m_pScene->GetSceneTag() == "Stage2")
+			GET_SINGLE(SceneManager)->CreateScene<Stage3>(SCENE_TYPE::NEXT);
+
+		if(m_pScene->GetSceneTag() == "Stage3")
+			GET_SINGLE(SceneManager)->CreateScene<GameClearScene>(SCENE_TYPE::NEXT);
+
+		// TODO: 게임클리어 화면 추가 후 작업
 	}
 }
 

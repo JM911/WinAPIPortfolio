@@ -43,8 +43,11 @@ void TilePlatform::SetPlatform(POSITION tPos, int iTileNumX, int iTileNumY)
 		{
 			Tile* pTile = new Tile;
 			pTile->Init();
-			if(m_bTileSetting)
+			if (m_bTileSetting)
+			{
 				pTile->SetTexture(m_strTileKey.c_str(), m_wstrTileTexFileName.c_str());
+				pTile->SetColorKey(255, 0, 255);
+			}
 			
 			pTile->SetPos(tPos.x + 1 + i * 32, tPos.y + 1 + j * 32);
 			m_vecTile.push_back(pTile);

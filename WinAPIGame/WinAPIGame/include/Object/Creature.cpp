@@ -27,7 +27,10 @@ void Creature::Input(float fDeltaTime)
 int Creature::Update(float fDeltaTime)
 {
 	if (!m_bStarted)
-		m_tPos.y = 500;
+	{
+		m_tPos.y = 600;
+		m_tSpeed.y = 0;
+	}
 
 	MoveObj::Update(fDeltaTime);
 	return 0;

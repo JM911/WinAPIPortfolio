@@ -115,6 +115,12 @@
     <Filter Include="07. Sound">
       <UniqueIdentifier>{b9718fcb-c942-4db9-b879-30690cf81dbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene\01. Scenes\01. Stages">
+      <UniqueIdentifier>{ad9e83ac-c0bb-47d7-82ad-af8228f0816b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\01. Scenes\02. Etc">
+      <UniqueIdentifier>{1293d642-47d9-4efc-a1fd-697be8dcd8ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -198,9 +204,6 @@
     <ClCompile Include="Object\TilePlatform.cpp">
       <Filter>03. Object\02. StaticObj\04. TilePlatform</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\StartScene.cpp">
-      <Filter>02. Scene\01. Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Object\UIObj.cpp">
       <Filter>03. Object\03. UIObj</Filter>
     </ClCompile>
@@ -215,9 +218,6 @@
     </ClCompile>
     <ClCompile Include="Object\UIButton.cpp">
       <Filter>03. Object\03. UIObj\02. UIButton</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\GameOverScene.cpp">
-      <Filter>02. Scene\01. Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Object\Needle.cpp">
       <Filter>03. Object\02. StaticObj\04. TilePlatform\01. Obstacles</Filter>
@@ -256,10 +256,22 @@
       <Filter>07. Sound</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Stage1.cpp">
-      <Filter>02. Scene\01. Scenes</Filter>
+      <Filter>02. Scene\01. Scenes\01. Stages</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Stage2.cpp">
-      <Filter>02. Scene\01. Scenes</Filter>
+      <Filter>02. Scene\01. Scenes\01. Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Stage3.cpp">
+      <Filter>02. Scene\01. Scenes\01. Stages</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameClearScene.cpp">
+      <Filter>02. Scene\01. Scenes\02. Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameOverScene.cpp">
+      <Filter>02. Scene\01. Scenes\02. Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StartScene.cpp">
+      <Filter>02. Scene\01. Scenes\02. Etc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,9 +368,6 @@
     <ClInclude Include="Object\TilePlatform.h">
       <Filter>03. Object\02. StaticObj\04. TilePlatform</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\StartScene.h">
-      <Filter>02. Scene\01. Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Object\UIObj.h">
       <Filter>03. Object\03. UIObj</Filter>
     </ClInclude>
@@ -373,9 +382,6 @@
     </ClInclude>
     <ClInclude Include="Object\UIButton.h">
       <Filter>03. Object\03. UIObj\02. UIButton</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\GameOverScene.h">
-      <Filter>02. Scene\01. Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Object\Needle.h">
       <Filter>03. Object\02. StaticObj\04. TilePlatform\01. Obstacles</Filter>
@@ -414,10 +420,22 @@
       <Filter>07. Sound</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Stage1.h">
-      <Filter>02. Scene\01. Scenes</Filter>
+      <Filter>02. Scene\01. Scenes\01. Stages</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Stage2.h">
-      <Filter>02. Scene\01. Scenes</Filter>
+      <Filter>02. Scene\01. Scenes\01. Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Stage3.h">
+      <Filter>02. Scene\01. Scenes\01. Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameClearScene.h">
+      <Filter>02. Scene\01. Scenes\02. Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameOverScene.h">
+      <Filter>02. Scene\01. Scenes\02. Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StartScene.h">
+      <Filter>02. Scene\01. Scenes\02. Etc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
