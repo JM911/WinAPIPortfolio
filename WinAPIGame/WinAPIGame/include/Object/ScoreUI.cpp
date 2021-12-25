@@ -49,6 +49,9 @@ int ScoreUI::Update(float fDeltaTime)
 	m_pNum1->SetNum(m_iScore / 10);
 	m_pNum2->SetNum(m_iScore % 10);
 
+	m_pNum1->SetPos(GetPos().x + 130, GetPos().y);
+	m_pNum2->SetPos(GetPos().x + 160, GetPos().y);
+
 	return 0;
 }
 

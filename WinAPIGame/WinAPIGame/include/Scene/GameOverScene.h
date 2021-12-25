@@ -13,5 +13,9 @@ private:
 
 public:
     virtual bool Init();
+
+public:
+    void RetryButtonCallback(float fDeltaTime);
+    void EndButtonCallback(float fDeltaTime);
 };
 

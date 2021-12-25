@@ -110,8 +110,8 @@ void SoundManager::ClearMap()
 		SAFE_DELETE(iter->second);
 	}
 
-	m_pSystem->close();
-	m_pSystem->release();
+	//m_pSystem->close();
+	//m_pSystem->release();
 
 	m_mapSound.clear();
 }

@@ -15,6 +15,7 @@
 #include "../Scene/Stage2.h"
 #include "../Scene/Stage3.h"
 #include "../Scene/GameClearScene.h"
+#include "../Sound/SoundManager.h"
 
 int Player::m_iLife = 5;
 
@@ -151,6 +152,10 @@ bool Player::Init()
 	pRC->AddCollisionFunction(COL_STATE::ENTER, this, &Player::CollisionWithStrawberry);
 
 	SAFE_RELEASE(pRC);
+
+	// »ç¿îµå
+	GET_SINGLE(SoundManager)->LoadSound("GetStrawberry", false, "Strawberry.ogg");
+	GET_SINGLE(SoundManager)->LoadSound("GetDashball", false, "Dashball.ogg");
 
 	return true;
 }
@@ -753,8 +758,13 @@ void Player::CollisionWithDashball(Collider* pSrc, Collider* pDest, float fDelta
 {
 	if (pDest->GetTag() == "DashballBody")
 	{
-		if(((Dashball*)pDest->GetObj())->GetEnable())
+		if (((Dashball*)pDest->GetObj())->GetEnable())
+		{
 			m_bDashEnable = true;
+
+			GET_SINGLE(SoundManager)->Play("GetDashball");
+			GET_SINGLE(SoundManager)->Volume(SOUND_TYPE::EFFECT, 0.3f);
+		}
 	}
 }
 
@@ -781,7 +791,12 @@ void Player::CollisionWithStrawberry(Collider* pSrc, Collider* pDest, float fDel
 {
 	if (pDest->GetTag() == "StrawberryBody")
 	{
-		if(((Strawberry*)pDest->GetObj())->GetEnable())
+		if (((Strawberry*)pDest->GetObj())->GetEnable())
+		{
 			ScoreUI::AddScore(1);
+
+			GET_SINGLE(SoundManager)->Play("GetStrawberry");
+			GET_SINGLE(SoundManager)->Volume(SOUND_TYPE::EFFECT, 0.3f);
+		}
 	}
 }

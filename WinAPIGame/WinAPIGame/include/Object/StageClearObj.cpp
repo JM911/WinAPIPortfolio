@@ -16,12 +16,14 @@ StageClearObj::~StageClearObj()
 
 bool StageClearObj::Init()
 {
-	SetPos(3750, 600);	// 임시 위치(Scene에서도 수정 가능)
-	SetSize(30, 30);
+	SetPos(3720, 550);	// 임시 위치(Scene에서도 수정 가능)
+	SetSize(50, 80);
 	// TODO: 텍스처 설정?
+	SetTexture("StageClearTex", L"Interactive/StageClear.bmp");
+	SetColorKey(255, 255, 255);
 
 	ColliderRect* pRC = AddCollider<ColliderRect>("StageClearBody");
-	pRC->SetRect(0, 0, 30, 30);
+	pRC->SetRect(0, 0, (int)GetSize().x, (int)GetSize().y);
 	SAFE_RELEASE(pRC);
 
 	return true;
