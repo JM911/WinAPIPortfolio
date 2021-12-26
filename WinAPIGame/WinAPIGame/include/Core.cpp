@@ -64,7 +64,7 @@ Core::~Core()
 
 BOOL Core::Create()
 {
-	m_hWnd = CreateWindowW(L"WinAPIGame", L"GameTitle", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
+	m_hWnd = CreateWindowW(L"WinAPIGame", L"Jump and Dash", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
 		nullptr, nullptr, m_hInst, nullptr);
 
 	if (!m_hWnd)
